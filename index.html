@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKUH – Konsultan Umrah & Haji Ramah Lansia | Mulai Rp 24 Jutaan</title>
+  <meta name="description" content="Konsultan umrah dan haji independen, spesialis paket ramah lansia & keluarga menengah. Akses 15+ vendor resmi Kemenag, cicilan mulai Rp 1,8jt/bln tanpa riba, pendampingan penuh." />
+  <meta name="keywords" content="umrah lansia, haji lansia, umrah ramah orang tua, paket umrah 2026, cicilan umrah syariah, konsultan umrah independen" />
+  <meta property="og:title" content="AKUH – Umrah & Haji Ramah Lansia, Mulai Rp 24 Jutaan" />
+  <meta property="og:description" content="Spesialis paket umrah & haji untuk lansia dan keluarga biasa. Kursi roda, kamar lantai bawah, pembimbing khusus, cicilan ringan." />
+  <meta property="og:image" content="assets/hero-kabah.png" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Tracking Config (diisi oleh server atau manual jika static) -->
+  <script>
+    window.AKUH_CONFIG = {
+      gtmId: 'GTM-XXXXXXX',
+      metaPixel: null,
+      tiktokPixel: null,
+      apiBase: ''
+    };
+  </script>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo" aria-label="AKUH Home">
+      <img src="assets/akuh-logo.png" alt="AKUH Logo" style="height:44px;width:auto;display:block" />
+    </a>
+    <div class="nav-menu" role="navigation" aria-label="Menu utama">
+      <a href="#why-us">Keunggulan</a>
+      <a href="#packages">Paket Hemat</a>
+      <a href="#how-it-works">Cara Kerja</a>
+      <a href="#testimonials">Testimoni</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <a id="nav-wa-btn" href="#cta-form" class="btn btn-primary" style="font-size:13px;padding:10px 18px;" aria-label="Konsultasi via WhatsApp">
+        <ph-icon name="whatsapp-logo" weight="fill"></ph-icon> Konsultasi Gratis WA
+      </a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Sidebar -->
+<div id="sidebar-overlay"></div>
+<aside id="mobile-sidebar" aria-label="Menu mobile">
+  <img src="assets/akuh-logo.png" alt="AKUH" style="height:40px;margin-bottom:16px" />
+  <button id="sidebar-close" aria-label="Tutup menu">✕</button>
+  <a href="#why-us">✨ Keunggulan</a>
+  <a href="#packages">📦 Paket Hemat</a>
+  <a href="#how-it-works">🔄 Cara Kerja</a>
+  <a href="#testimonials">💬 Testimoni</a>
+  <a href="#faq">❓ FAQ</a>
+  <a href="#cta-form" class="btn btn-primary btn-full" style="margin-top:14px;justify-content:center;">
+    Chat WhatsApp Sekarang
+  </a>
+</aside>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero" aria-label="Hero section">
+  <div class="hero-bg" role="img" aria-label="Ka'bah malam hari penuh jamaah"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌙 Spesialis Umrah & Haji Ramah Lansia · 2026</div>
+    <h1 class="hero-title">
+      Umrah & Haji Impian<br/>
+      untuk <span>Bapak Ibu & Orang Tua</span>
+    </h1>
+    <p class="hero-sub">Mulai Rp 22,9 Jutaan &bull; DP Cukup Rp 500.000 &bull; Ramah Lansia</p>
+    <p class="hero-desc">
+      Bpk/Ibu tidak perlu khawatir soal stamina atau mobilitas. Kami sediakan kursi roda,
+      kamar lantai bawah, pembimbing khusus lansia, dan pendampingan pribadi dari 15+ vendor
+      resmi Kemenag — tanpa riba, tanpa biaya tersembunyi.
+    </p>
+    <div class="hero-buttons">
+      <a href="#packages" class="btn btn-primary btn-lg" id="hero-cta-paket">
+        📦 Lihat Paket Hemat Sekarang
+      </a>
+      <a href="#cta-form" class="btn btn-accent btn-lg" id="hero-cta-wa">
+        💬 Chat Konsultasi Gratis
+      </a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><div class="trust-icon">✓</div> Resmi Kemenag</div>
+      <div class="trust-item"><div class="trust-icon">✓</div> Ramah Lansia ♿</div>
+      <div class="trust-item"><div class="trust-icon">✓</div> Cicilan 0% Syariah</div>
+      <div class="trust-item"><div class="trust-icon">✓</div> Kursi Roda Tersedia</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY US ==================== -->
+<section id="why-us" class="section-pad">
+  <div class="container text-center">
+    <p class="badge badge-green">✨ Keunggulan Kami</p>
+    <h2 class="section-title title-underline" style="margin-top:10px;">
+      Kenapa Ribuan Jamaah<br/>Percayakan Ibadahnya ke AKUH?
+    </h2>
+    <p class="section-subtitle">Konsultan independen spesialis lansia – kami yang bandingkan, Anda yang berangkat tenang</p>
+    <div class="why-cards">
+      <!-- Lansia Card Khusus -->
+      <div class="why-card anim-fade" onclick="location.href='#packages'" style="border-color:var(--accent);background:linear-gradient(135deg,#fffbf0,#fff)">
+        <div class="why-icon" style="background:#fff4d4">
+          <svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 256 256' fill='none' stroke='#D4A017' stroke-width='16' stroke-linecap='round' stroke-linejoin='round'><circle cx='128' cy='88' r='40'/><path d='M80 200c0-26.5 21.5-48 48-48s48 21.5 48 48'/><path d='M56 216c0-22 15-40 36-46M200 216c0-22-15-40-36-46'/><circle cx='72' cy='112' r='28'/><circle cx='184' cy='112' r='28'/></svg>
+        </div>
+        <h3>♿ Spesialis Paket Lansia</h3>
+        <p>Kursi roda, kamar lantai bawah, pembimbing khusus lansia, dan tempo ibadah yang lebih santai. Aman untuk usia 60+.</p>
+      </div>
+      <div class="why-card anim-fade anim-delay-1" onclick="location.href='#packages'">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256" fill="none" stroke="#0A7C4F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M216 112v96a8 8 0 01-8 8H48a8 8 0 01-8-8v-96"/>
+            <rect x="16" y="64" width="224" height="48" rx="8"/>
+            <path d="M128 64V216M96 64l-32-32M160 64l32-32"/>
+          </svg>
+        </div>
+        <h3>Akses 15+ Vendor Terpercaya</h3>
+        <p>Saya kerja sama dengan banyak travel resmi. Saya yang bandingkan semua harga supaya Anda dapat yang paling murah.</p>
+      </div>
+      <div class="why-card anim-fade anim-delay-2" onclick="location.href='#packages'">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256" fill="none" stroke="#0A7C4F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="128" cy="128" r="96"/>
+            <path d="M128 72v56l40 24"/>
+          </svg>
+        </div>
+        <h3>Harga Khusus Kelas Menengah</h3>
+        <p>Mulai Rp 24 jutaan (Quad). Banyak promo cicilan khusus untuk karyawan, ibu rumah tangga, dan pedagang kecil.</p>
+      </div>
+      <div class="why-card anim-fade anim-delay-3" onclick="location.href='#cta-form'">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256" fill="none" stroke="#0A7C4F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="32" y="80" width="192" height="136" rx="8"/>
+            <path d="M168 80V56a40 40 0 00-80 0v24"/>
+            <circle cx="128" cy="148" r="12"/>
+            <path d="M128 160v24"/>
+          </svg>
+        </div>
+        <h3>Cicilan Super Ringan Tanpa Riba</h3>
+        <p>DP mulai Rp 5–8 juta + angsuran 10–18 bulan via Bank Syariah (BSI, Muamalat, dll). Aman & halal.</p>
+      </div>
+      <div class="why-card anim-fade anim-delay-4" onclick="location.href='#how-it-works'">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256" fill="none" stroke="#0A7C4F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="128" cy="128" r="96"/>
+            <path d="M128 80v48l32 16"/>
+          </svg>
+        </div>
+        <h3>Pendampingan Konsultan Pribadi</h3>
+        <p>Dari konsultasi, pilih paket, sampai pulang ke Indonesia — saya dampingi full via chat & group WA jamaah.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PACKAGES ==================== -->
+<section id="packages" class="section-pad">
+  <div class="container text-center">
+    <p class="badge badge-green">📦 Paket Pilihan</p>
+    <h2 class="section-title title-underline" style="margin-top:10px;">
+      Paket Umrah & Haji 2026<br/>– Hemat, Ramah Lansia & Keluarga
+    </h2>
+    <p class="section-subtitle">Harga transparan dari vendor resmi · Diperbarui setiap minggu</p>
+    <div class="pkg-filters" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;align-items:center;">
+      <select id="filter-type" class="filter-btn" style="padding:10px 16px;outline:none;" onchange="applyFilters()">
+        <option value="all">🕌 Semua Paket (Umrah &amp; Haji)</option>
+        <option value="umrah">Umrah Saja</option>
+        <option value="haji">Haji Saja</option>
+      </select>
+      <select id="filter-price" class="filter-btn" style="padding:10px 16px;outline:none;" onchange="applyFilters()">
+        <option value="all">💰 Semua Range Harga</option>
+        <option value="under25">&lt; Rp 25 Juta</option>
+        <option value="25to35">Rp 25 Juta - Rp 35 Juta</option>
+        <option value="over35">&gt; Rp 35 Juta (Premium)</option>
+      </select>
+    </div>
+    <div class="pkg-grid" id="pkg-grid">
+
+      <!-- ── PAKET EKONOMIS ── -->
+      <div class="pkg-card anim-fade" data-type="umrah" data-price="under25">
+        <div class="pkg-img">
+          <img src="assets/hero-kabah.png" alt="Paket Ekonomis" loading="lazy" />
+          <span class="pkg-popular-tag" style="background:#2d8a5e">🌙 Paling Terjangkau</span>
+        </div>
+        <div class="pkg-body">
+          <div>
+            <div class="badge badge-green" style="font-size:11px;">Ethiopian / Lion Air · 9 Hari</div>
+            <h3 class="pkg-name" style="margin-top:8px;">Paket Ekonomis</h3>
+          </div>
+          <div class="pkg-price-row">
+            <span class="pkg-price">Rp 22,999</span>
+            <span class="pkg-price-label">jt/org Quad</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-soft);margin-bottom:6px">
+            Triple <strong>Rp 24,999 jt</strong> &nbsp;|&nbsp; Double <strong>Rp 26,999 jt</strong>
+          </div>
+          <span class="pkg-cicilan">💰 DP hanya Rp 500.000</span>
+          <ul class="pkg-features">
+            <li>Hotel Makkah: Zillal Al Nuzala ⭐⭐⭐</li>
+            <li>Hotel Madinah: Taibah Hills ⭐⭐⭐</li>
+            <li>Ziarah Kota Madinah &amp; Makkah</li>
+            <li>Perlengkapan Umroh &amp; Handling</li>
+            <li>Infaq Rp 100.000 (sosial/masjid)</li>
+          </ul>
+          <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" id="pkg-ekonomis">
+            Lihat Detail &amp; Daftar
+          </a>
+        </div>
+      </div>
+
+      <!-- ── PAKET DARUSSALAM ── -->
+      <div class="pkg-card popular anim-fade anim-delay-1" data-type="umrah" data-price="25to35">
+        <div class="pkg-img">
+          <img src="assets/hotel-quad.png" alt="Paket Darussalam" loading="lazy" />
+          <span class="pkg-popular-tag">🔥 Terlaris</span>
+        </div>
+        <div class="pkg-body">
+          <div>
+            <div class="badge badge-green" style="font-size:11px;">Qatar / Emirates / Oman · 9 Hari</div>
+            <h3 class="pkg-name" style="margin-top:8px;">Paket Darussalam</h3>
+          </div>
+          <div class="pkg-price-row">
+            <span class="pkg-price">Rp 26,666</span>
+            <span class="pkg-price-label">jt/org Quad</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-soft);margin-bottom:6px">
+            Triple <strong>Rp 28,666 jt</strong> &nbsp;|&nbsp; Double <strong>Rp 30,666 jt</strong>
+          </div>
+          <span class="pkg-cicilan">💰 DP hanya Rp 500.000</span>
+          <ul class="pkg-features">
+            <li>Hotel Makkah: Nada Ajyad ⭐⭐⭐⭐</li>
+            <li>Hotel Madinah: Mirage Al Salam ⭐⭐⭐</li>
+            <li>Ziarah Kota Madinah &amp; Makkah</li>
+            <li>Perlengkapan Umroh &amp; Handling</li>
+            <li>Maskapai premium (Qatar/Emirates/Oman)</li>
+          </ul>
+          <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" id="pkg-darussalam">
+            Lihat Detail &amp; Daftar
+          </a>
+        </div>
+      </div>
+
+      <!-- ── PAKET ADEN ── -->
+      <div class="pkg-card anim-fade anim-delay-2" data-type="umrah" data-price="25to35">
+        <div class="pkg-img">
+          <img src="assets/hero-kabah.png" alt="Paket Aden" loading="lazy" />
+          <span class="pkg-popular-tag" style="background:var(--accent)">✨ Bintang 5 Makkah</span>
+        </div>
+        <div class="pkg-body">
+          <div>
+            <div class="badge badge-gold" style="font-size:11px;">Saudia / Garuda / Qatar · 9 Hari</div>
+            <h3 class="pkg-name" style="margin-top:8px;">Paket Aden</h3>
+          </div>
+          <div class="pkg-price-row">
+            <span class="pkg-price">Rp 30,6</span>
+            <span class="pkg-price-label">jt/org Quad</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-soft);margin-bottom:6px">
+            Triple <strong>Rp 32,6 jt</strong> &nbsp;|&nbsp; Double <strong>Rp 34,6 jt</strong>
+          </div>
+          <span class="pkg-cicilan">💰 DP hanya Rp 500.000</span>
+          <ul class="pkg-features">
+            <li>Hotel Makkah: Azka Al Safa ⭐⭐⭐⭐⭐</li>
+            <li>Hotel Madinah: Kayan Int./Al Ansar ⭐⭐⭐⭐</li>
+            <li>City Tour Thaif</li>
+            <li>Ziarah lengkap Madinah &amp; Makkah</li>
+            <li>Perlengkapan Umroh &amp; Handling</li>
+          </ul>
+          <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" id="pkg-aden">
+            Lihat Detail &amp; Daftar
+          </a>
+        </div>
+      </div>
+
+      <!-- ── PAKET ARBAIN ── -->
+      <div class="pkg-card anim-fade anim-delay-1" data-type="umrah" data-price="25to35">
+        <div class="pkg-img">
+          <img src="assets/hotel-quad.png" alt="Paket Arbain" loading="lazy" />
+          <span class="pkg-popular-tag" style="background:#6B46C1">🕌 40 Shalat Arbain</span>
+        </div>
+        <div class="pkg-body">
+          <div>
+            <div class="badge badge-green" style="font-size:11px;">Ethiopian Airlines · 16 Hari</div>
+            <h3 class="pkg-name" style="margin-top:8px;">Paket Arbain</h3>
+          </div>
+          <div class="pkg-price-row">
+            <span class="pkg-price">Rp 32,6</span>
+            <span class="pkg-price-label">jt/org Quad</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-soft);margin-bottom:6px">
+            Triple <strong>Rp 34,6 jt</strong> &nbsp;|&nbsp; Double <strong>Rp 36,6 jt</strong>
+          </div>
+          <span class="pkg-cicilan" style="background:#ede9fe;color:#5b21b6">🕌 16 Hari · Genapi 40 Shalat</span>
+          <ul class="pkg-features">
+            <li>Hotel Makkah: Zillal Al Nuzala ⭐⭐⭐</li>
+            <li>Hotel Madinah: Burj Mawaddah ⭐⭐⭐</li>
+            <li>16 hari khusyuk ibadah penuh</li>
+            <li>Genapi 40 waktu shalat di Masjid Nabawi</li>
+            <li>Ziarah Kota Madinah &amp; Makkah</li>
+          </ul>
+          <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" id="pkg-arbain">
+            Lihat Detail &amp; Daftar
+          </a>
+        </div>
+      </div>
+
+      <!-- ── PAKET FIRDAUS ── -->
+      <div class="pkg-card anim-fade anim-delay-2" data-type="umrah" data-price="over35">
+        <div class="pkg-img">
+          <img src="assets/hero-kabah.png" alt="Paket Firdaus" loading="lazy" />
+          <span class="pkg-popular-tag" style="background:#B7791F">👑 Makkah Tower</span>
+        </div>
+        <div class="pkg-body">
+          <div>
+            <div class="badge badge-gold" style="font-size:11px;">Saudia / Garuda / Qatar · 9 Hari</div>
+            <h3 class="pkg-name" style="margin-top:8px;">Paket Firdaus</h3>
+          </div>
+          <div class="pkg-price-row">
+            <span class="pkg-price">Rp 35,5</span>
+            <span class="pkg-price-label">jt/org Quad</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-soft);margin-bottom:6px">
+            Triple <strong>Rp 37,5 jt</strong> &nbsp;|&nbsp; Double <strong>Rp 39,5 jt</strong>
+          </div>
+          <span class="pkg-cicilan">💰 DP hanya Rp 500.000</span>
+          <ul class="pkg-features">
+            <li>Hotel Makkah: Safwah/Makkah Tower ⭐⭐⭐⭐⭐</li>
+            <li>Hotel Madinah: Emaar Worth/Taibah ⭐⭐⭐⭐⭐</li>
+            <li>Kereta Cepat Haramain</li>
+            <li>Museum Clock Zam-Zam Tower</li>
+            <li>City Tour Thaif &amp; Ziarah Lengkap</li>
+          </ul>
+          <a href="#cta-form" class="btn btn-accent btn-full pkg-btn" id="pkg-firdaus">
+            Lihat Detail &amp; Daftar
+          </a>
+        </div>
+      </div>
+
+      <!-- ── PAKET AL KAUTSAR ── -->
+      <div class="pkg-card anim-fade anim-delay-3" data-type="umrah" data-price="over35">
+        <div class="pkg-img">
+          <img src="assets/hotel-quad.png" alt="Paket Al Kautsar" loading="lazy" />
+          <span class="pkg-popular-tag" style="background:#0A7C4F">🌟 12 Hari Premium</span>
+        </div>
+        <div class="pkg-body">
+          <div>
+            <div class="badge badge-gold" style="font-size:11px;">Saudia / Garuda / Qatar · 12 Hari</div>
+            <h3 class="pkg-name" style="margin-top:8px;">Paket Al Kautsar</h3>
+          </div>
+          <div class="pkg-price-row">
+            <span class="pkg-price">Rp 40,1</span>
+            <span class="pkg-price-label">jt/org Quad</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-soft);margin-bottom:6px">
+            Triple <strong>Rp 42,1 jt</strong> &nbsp;|&nbsp; Double <strong>Rp 44,1 jt</strong>
+          </div>
+          <span class="pkg-cicilan">💰 DP hanya Rp 500.000</span>
+          <ul class="pkg-features">
+            <li>Hotel Makkah: Safwah/Makkah Tower ⭐⭐⭐⭐⭐</li>
+            <li>Hotel Madinah: Emaar Worth/Taibah ⭐⭐⭐⭐⭐</li>
+            <li>Kereta Cepat Haramain</li>
+            <li>Museum Clock Zam-Zam Tower</li>
+            <li>City Tour Thaif + 12 Hari Penuh</li>
+          </ul>
+          <a href="#cta-form" class="btn btn-accent btn-full pkg-btn" id="pkg-alkautsar">
+            Lihat Detail &amp; Daftar
+          </a>
+        </div>
+      </div>
+
+
+    <div style="margin-top:32px;">
+      <p style="color:var(--text-soft);font-size:14px;margin-bottom:14px;">Tidak menemukan yang cocok? Konsultasikan budget &amp; kebutuhan Anda!</p>
+      <a href="#cta-form" class="btn btn-outline" id="btn-konsultasi-paket">
+        💬 Konsultasi Paket Custom
+      </a>
+    </div>
+  </div>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section id="how-it-works" class="section-pad">
+  <div class="container text-center">
+    <p class="badge badge-green">🔄 Prosesnya</p>
+    <h2 class="section-title title-underline" style="margin-top:10px;">
+      Prosesnya Gampang Banget,<br/>Cuma 4 Langkah
+    </h2>
+    <p class="section-subtitle">Tidak perlu datang ke kantor – semua bisa dari HP Anda</p>
+    <div class="steps-grid">
+      <div class="step-item anim-fade anim-delay-1">
+        <div class="step-num">01</div>
+        <div class="step-icon">💬</div>
+        <h3>Chat atau WA Saya</h3>
+        <p>Ceritakan budget, keinginan, dan waktu keberangkatan Anda. Gratis, tanpa komitmen.</p>
+      </div>
+      <div class="step-item anim-fade anim-delay-2">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔍</div>
+        <h3>Saya Bandingkan 15+ Vendor</h3>
+        <p>Dalam 1×24 jam, saya kirimkan 3–4 rekomendasi paket terbaik sesuai budget Anda.</p>
+      </div>
+      <div class="step-item anim-fade anim-delay-3">
+        <div class="step-num">03</div>
+        <div class="step-icon">✅</div>
+        <h3>Pilih & DP Kecil</h3>
+        <p>Pilih paket favorit Anda → bayar DP mulai Rp 5 juta → cicilan mulai berjalan.</p>
+      </div>
+      <div class="step-item anim-fade anim-delay-4">
+        <div class="step-num">04</div>
+        <div class="step-icon">🕌</div>
+        <h3>Berangkat dengan Tenang</h3>
+        <p>Saya dampingi dari awal hingga pulang ke Indonesia via chat & group WA jamaah.</p>
+      </div>
+    </div>
+    <div style="margin-top:48px;">
+      <a href="#cta-form" class="btn btn-primary btn-lg" id="btn-mulai-konsultasi">
+        💬 Mulai Konsultasi Sekarang – Gratis!
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LANSIA SECTION ==================== -->
+<section id="lansia" class="section-pad" style="background:linear-gradient(135deg,#fffbf0 0%,#fff8e6 100%)">
+  <div class="container">
+    <div class="lansia-grid">
+      <div class="anim-fade">
+        <p class="badge badge-gold" style="margin-bottom:14px">♿ Khusus Lansia & Orang Tua</p>
+        <h2 class="section-title" style="margin-bottom:16px;line-height:1.2">
+          Bpk/Ibu Usia 60+?<br/>
+          <span style="color:var(--primary)">Tenang, Ada Paket Khusus</span><br/>untuk Anda
+        </h2>
+        <p style="font-size:16px;color:var(--text-soft);line-height:1.8;margin-bottom:24px">
+          Banyak lansia yang ingin umrah tapi khawatir soal stamina, mobilitas, atau kondisi kesehatan. 
+          AKUH punya solusinya — kami bandingkan paket dari vendor yang menyediakan fasilitas khusus lansia.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:36px;height:36px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0">♿</div>
+            <div><strong>Kursi Roda & Pendamping</strong><p style="font-size:13px;color:var(--text-soft);margin-top:3px">Tersedia kursi roda dan pendamping khusus dari keberangkatan hingga kembali ke tanah air.</p></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:36px;height:36px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0">🛏️</div>
+            <div><strong>Kamar Ground Floor</strong><p style="font-size:13px;color:var(--text-soft);margin-top:3px">Kamar lantai bawah agar Bpk/Ibu tidak perlu menaiki tangga, lebih aman dan nyaman.</p></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:36px;height:36px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0">🚑</div>
+            <div><strong>Pendampingan Medis</strong><p style="font-size:13px;color:var(--text-soft);margin-top:3px">Beberapa vendor menyertakan tenaga medis dan P3K untuk jamaah lansia.</p></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:36px;height:36px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0">🕌</div>
+            <div><strong>Tempo Ibadah Santai</strong><p style="font-size:13px;color:var(--text-soft);margin-top:3px">Jadwal ibadah fleksibel, tidak terburu-buru, cocok untuk kondisi fisik lansia.</p></div>
+          </div>
+        </div>
+        <a href="#cta-form" class="btn btn-accent btn-lg" id="btn-lansia-wa">
+          💬 Tanya Paket Lansia Sekarang
+        </a>
+      </div>
+      <div class="anim-fade anim-delay-2">
+        <img src="assets/hero-kabah.png" alt="Ka'bah - Umrah Ramah Lansia" style="border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,0.15);width:100%" />
+        <div class="stats-grid">
+          <div style="background:white;border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.07)">
+            <div style="font-size:28px;font-weight:800;color:var(--primary);font-family:Poppins,sans-serif">500m</div>
+            <div style="font-size:12px;color:var(--text-soft)">Jarak hotel ke Haram</div>
+          </div>
+          <div style="background:white;border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.07)">
+            <div style="font-size:28px;font-weight:800;color:var(--accent);font-family:Poppins,sans-serif">60+</div>
+            <div style="font-size:12px;color:var(--text-soft)">Usia lansia dilayani</div>
+          </div>
+          <div style="background:white;border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.07)">
+            <div style="font-size:28px;font-weight:800;color:var(--primary);font-family:Poppins,sans-serif">15+</div>
+            <div style="font-size:12px;color:var(--text-soft)">Vendor tersedia</div>
+          </div>
+          <div style="background:white;border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.07)">
+            <div style="font-size:28px;font-weight:800;color:var(--accent);font-family:Poppins,sans-serif">0%</div>
+            <div style="font-size:12px;color:var(--text-soft)">Riba cicilan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section id="testimonials" class="section-pad" style="background:var(--bg-light);">
+  <div class="container text-center">
+    <p class="badge badge-green">💬 Testimoni</p>
+    <h2 class="section-title title-underline" style="margin-top:10px;">
+      Kata Mereka yang Sudah Berangkat
+    </h2>
+    <p class="section-subtitle">Bukan artis, bukan orang kaya — mereka orang biasa seperti Anda</p>
+    <div class="testi-grid">
+      <div class="testi-card anim-fade anim-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Saya ibu rumah tangga biasa. Tidak pernah membayangkan bisa umrah. Dengan cicilan 15 bulan, akhirnya umrah bareng suami. Makasih banyak Kak!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👩‍🦱</div>
+          <div>
+            <div class="testi-name">Bu Siti Rahayu</div>
+            <div class="testi-profile">Ibu Rumah Tangga · Bekasi</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card anim-fade anim-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Budget saya terbatas sebagai karyawan swasta, tapi dapat paket Rp 26,5 juta. Prosesnya mudah, transparan, tidak ada biaya tersembunyi sama sekali!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👨</div>
+          <div>
+            <div class="testi-name">Pak Ahmad Fauzi</div>
+            <div class="testi-profile">Karyawan Swasta · Surabaya</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card anim-fade anim-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Saya pedagang kecil. Awalnya ragu, tapi konsultasinya sabar banget njelasinnya. DP Rp 6 juta, cicilan 12 bulan. Alhamdulillah bisa umrah keluarga!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🧕</div>
+          <div>
+            <div class="testi-name">Bu Dewi Fitriani</div>
+            <div class="testi-profile">Pedagang · Solo</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card anim-fade anim-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"PNS golongan II, gaji pas-pasan. Dikasih opsi cicilan via BSI, pas banget. Berangkat bareng istri, pengalaman paling indah dalam hidup kami."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👨‍💼</div>
+          <div>
+            <div class="testi-name">Pak Ridwan Santoso</div>
+            <div class="testi-profile">PNS Golongan II · Bandung</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card anim-fade anim-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Tadinya mau langsung ke travel, tapi temannya sarankan ke sini dulu. Ternyata bisa dapat harga lebih murah Rp 2 juta dari harga di travel! Jelas lebih untung."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👩</div>
+          <div>
+            <div class="testi-name">Bu Erni Sulistyawati</div>
+            <div class="testi-profile">Guru SD · Yogyakarta</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card anim-fade anim-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Orang tua saya usia 63 tahun, baru pertama umrah. Konsultannya sabar banget ngurusin semua, sampai grup WA jamaah aktif selama perjalanan. Luar biasa!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🧓</div>
+          <div>
+            <div class="testi-name">Bpk Samsul, via anaknya</div>
+            <div class="testi-profile">Pensiunan · Malang</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section id="faq" class="section-pad">
+  <div class="container text-center">
+    <p class="badge badge-green">❓ FAQ</p>
+    <h2 class="section-title title-underline" style="margin-top:10px;">
+      Pertanyaan yang Sering Ditanyakan
+    </h2>
+    <p class="section-subtitle">Jawaban jujur, tidak ada yang ditutup-tutupi</p>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Bisa cicilan berapa lama?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          Cicilan bisa dilakukan maksimal 18 bulan via bank syariah seperti Bank BSI atau Bank Muamalat. DP awal mulai Rp 5–8 juta saja. Tidak ada bunga riba – semua menggunakan akad syariah yang halal.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Apa bedanya lewat konsultan vs langsung ke travel?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          Kalau langsung ke travel, Anda hanya dapat harga dari 1 vendor. Lewat saya, saya bandingkan 15+ vendor resmi dan carikan yang paling murah untuk budget Anda. Anda bisa hemat Rp 1–3 juta per orang. Plus dapat pendampingan pribadi dari saya, bukan call center travel.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Apakah ada biaya tambahan atau biaya tersembunyi?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          Tidak ada sama sekali. Semua biaya sudah saya jelaskan dari awal secara transparan, termasuk biaya visa, handling, dan perlengkapan. Tidak ada yang disembunyikan. Konsultasi juga gratis tanpa biaya konsultan.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Bagaimana kalau saya ingin membatalkan?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          Ada ketentuan resmi dari masing-masing travel mengenai pembatalan. Saya akan jelaskan detail sebelum Anda membayar DP, sehingga Anda sudah tahu konsekuensinya dari awal. Biasanya ada refund parsial tergantung waktu pembatalan.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Apakah travel yang digunakan sudah terdaftar di Kemenag?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          Ya, 100%. Semua vendor yang saya rekomendasikan adalah travel resmi terdaftar di Kemenag RI (Kementerian Agama). Anda bisa cek sendiri nomornya di situs resmi Kemenag. Keamanan jamaah adalah prioritas utama.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Berapa minimal DP untuk mulai mendaftar?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          DP (deposit) hanya <strong>Rp 500.000</strong> saja untuk semua paket! Setiap pendaftaran juga sudah otomatis termasuk infaq Rp 100.000 untuk sosial (Masjid, Yatim, Dhuafa). Pelunasan dilakukan bertahap sesuai kesepakatan.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Apakah bisa untuk jamaah lansia atau penyandang disabilitas?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          Bisa! Beberapa vendor menyediakan paket khusus lansia dengan fasilitas kursi roda, kamar lantai bawah, dan pembimbing khusus. Beritahu kondisi Anda saat konsultasi agar saya carikan paket yang paling sesuai.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Berapa lama proses pengurusan setelah daftar?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          Setelah DP dan dokumen lengkap, proses pengurusan visa dan dokumen biasanya 2–4 minggu. Untuk keberangkatan 2026, semakin cepat daftar semakin aman kuotanya. Hubungi saya sekarang untuk informasi lebih lanjut!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA FORM ==================== -->
+<section id="cta-form" class="section-pad">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-left anim-fade">
+        <p class="badge" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);margin-bottom:16px;">📋 Konsultasi Gratis</p>
+        <h2>Mau Tahu Paket yang<br/>Paling Cocok untuk<br/>Budget Anda?</h2>
+        <p style="margin-top:16px;">
+          Isi form ini dan saya hubungi dalam <strong style="color:#f0c040;">5 menit</strong>.
+          Gratis, tanpa komitmen, tanpa biaya konsultan apapun.
+        </p>
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px;">
+          <div class="trust-item"><div class="trust-icon">✓</div> Respon dalam 5 menit (jam kerja)</div>
+          <div class="trust-item"><div class="trust-icon">✓</div> Konsultasi 100% gratis</div>
+          <div class="trust-item"><div class="trust-icon">✓</div> Tidak ada tekanan untuk beli</div>
+          <div class="trust-item"><div class="trust-icon">✓</div> Harga transparan sejak awal</div>
+        </div>
+      </div>
+      <div class="cta-form anim-fade anim-delay-2">
+        <div class="wizard-header">
+          <h3 id="wizard-title">Langkah 1: Identitas</h3>
+          <div class="wizard-progress">
+            <div class="wizard-step-bullet active" id="bullet-1">1</div>
+            <div class="wizard-step-bullet" id="bullet-2">2</div>
+            <div class="wizard-step-bullet" id="bullet-3">3</div>
+          </div>
+        </div>
+
+        <form id="consultation-form" onsubmit="submitWizard(event)">
+          <!-- STEP 1 -->
+          <div class="form-step active" id="step-1">
+            <div class="form-group">
+              <label for="form-type">Mau Daftar Apa? *</label>
+              <select id="form-type" required>
+                <option value="umrah">Umrah</option>
+                <option value="haji">Haji</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="form-name">Nama Lengkap *</label>
+              <input type="text" id="form-name" placeholder="Contoh: Budi Santoso" required />
+            </div>
+            <div class="form-group">
+              <label for="form-wa">No. WhatsApp *</label>
+              <input type="tel" id="form-wa" placeholder="08xxxxx" required />
+            </div>
+            <div class="form-group" style="position:relative">
+              <label for="form-wilayah">Kecamatan / Wilayah Asal *</label>
+              <input type="text" id="form-wilayah" placeholder="Ketik 3 huruf kecamatan..." autocomplete="off" required />
+              <div id="wilayah-suggestions" class="autocomplete-list"></div>
+            </div>
+            <div class="wizard-actions" style="justify-content:flex-end">
+              <button type="button" class="btn btn-primary" onclick="nextStep(2)">Lanjut <span style="font-size:16px">➔</span></button>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="form-step" id="step-2">
+            <div class="form-group">
+              <label for="form-waktu">Rencana Berangkat *</label>
+              <select id="form-waktu" required>
+                <option value="">Pilih bulan/waktu</option>
+                <option value="1-2-bulan">1-2 Bulan Kedepan</option>
+                <option value="3-6-bulan">3-6 Bulan Kedepan</option>
+                <option value="musim-liburan">Musim Liburan Sekolah</option>
+                <option value="belum-pasti">Belum Pasti (Tanya dulu)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="form-budget">Budget Per Orang *</label>
+              <select id="form-budget" required>
+                <option value="">Pilih perkiraan budget</option>
+                <option value="under25">&lt; Rp 25 Juta</option>
+                <option value="25to35">Rp 25 Juta - Rp 35 Juta</option>
+                <option value="over35">&gt; Rp 35 Juta (Premium)</option>
+              </select>
+            </div>
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-outline wizard-btn-prev" onclick="prevStep(1)">Kembali</button>
+              <button type="button" class="btn btn-primary wizard-btn-next" onclick="nextStep(3)">Lanjut <span style="font-size:16px">➔</span></button>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="form-step" id="step-3">
+            <div class="form-group">
+              <label for="form-paspor">Status Paspor Utama *</label>
+              <select id="form-paspor" required>
+                <option value="ready">Sudah Ada (Aktif)</option>
+                <option value="mati">Ada tapi Expired / Mati</option>
+                <option value="belum">Belum Punya Sama Sekali</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="form-jamaah">Jumlah Jamaah Berangkat *</label>
+              <input type="number" id="form-jamaah" oninput="renderJamaahList()" placeholder="Berapa orang?" min="1" max="10" required />
+            </div>
+            
+            <div id="jamaah-container" style="margin-bottom:16px;"></div>
+
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-outline wizard-btn-prev" onclick="prevStep(2)">Kembali</button>
+              <button type="submit" class="btn btn-accent wizard-btn-next" id="btn-submit-form">Kirim &amp; Konsultasi</button>
+            </div>
+            <p style="text-align:center;font-size:12px;color:rgba(0,0,0,0.5);margin-top:14px">🔒 Data Anda aman &amp; tidak akan disalahgunakan</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <img src="assets/akuh-logo.png" alt="AKUH" style="height:52px;margin-bottom:8px" />
+      <div class="footer-brand-name">AKUH</div>
+        <div class="footer-brand-tag">Konsultan Umrah & Haji Multi-Vendor · Resmi Kemenag</div>
+        <p style="font-size:14px;line-height:1.7;max-width:320px;margin-bottom:8px;">
+          Membantu masyarakat menengah Indonesia mewujudkan ibadah umrah dan haji dengan harga paling hemat, cicilan ringan, dan pendampingan penuh.
+        </p>
+        <a href="#cta-form" class="footer-wa" id="footer-wa-link">
+          📱 Konsultasi (WhatsApp)
+        </a>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AKUH – Konsultan Umrah & Haji Independen. Dibuat dengan ❤️ untuk umat.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">📸</a>
+        <a href="#" aria-label="Facebook">👤</a>
+        <a href="#" aria-label="TikTok">🎵</a>
+        <a href="#" aria-label="YouTube">📺</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== FLOATING WA ==================== -->
+<a id="float-wa" href="#cta-form" aria-label="Chat WhatsApp">
+  <span id="float-wa-icon">📱</span>
+  <span>Chat Sekarang</span>
+</a>
+
+<!-- ==================== TOAST ==================== -->
+<div id="toast" role="alert" aria-live="polite">
+  <strong>🎉 Terima kasih!</strong>
+  <p>Pesan WA segera dikirim. Mohon tunggu respons kami dalam 5 menit.</p>
+</div>
+
+<!-- ==================== EXIT POPUP ==================== -->
+<div id="exit-popup" role="dialog" aria-modal="true" aria-labelledby="exit-title">
+  <div class="exit-overlay" onclick="closeExitPopup()"></div>
+  <div class="exit-box">
+    <button class="exit-close" onclick="closeExitPopup()" aria-label="Tutup">✕</button>
+    <div style="font-size:40px;margin-bottom:8px;">🕌</div>
+    <h3 id="exit-title">Tunggu dulu, Pak/Bu!</h3>
+    <p>Mau paket umrah <strong style="color:var(--primary);">di bawah Rp 28 juta</strong>?<br/>Chat sekarang sebelum kuota habis!</p>
+    <a href="#cta-form" class="btn btn-primary btn-full btn-lg" id="exit-wa-btn" onclick="closeExitPopup()">
+      💬 Chat WA Sekarang – Gratis!
+    </a>
+    <p style="margin-top:14px;font-size:12px;color:var(--text-soft);cursor:pointer;" onclick="closeExitPopup()">Tidak, saya tidak mau paket hemat</p>
+  </div>
+</div>
+
+<!-- Tracking Module -->
+<script src="tracking.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
