@@ -1,0 +1,11 @@
+#!/usr/bin/expect -f
+set timeout -1
+set password "gha-sj5-u6e-pdp"
+spawn ssh ubuntu@43.157.202.165
+expect "password:"
+send "$password\r"
+expect "$ "
+send "sudo docker ps\r"
+expect "$ "
+send "exit\r"
+expect eof
