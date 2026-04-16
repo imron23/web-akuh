@@ -71,18 +71,21 @@ function toggleFaq(questionEl) {
 
 // ===== PACKAGE FILTER =====
 function applyFilters() {
-  const typeFilter = document.getElementById('filter-type').value;
+  const travelFilter = document.getElementById('filter-travel').value;
+  const monthFilter = document.getElementById('filter-month').value;
   const priceFilter = document.getElementById('filter-price').value;
   
   const cards = document.querySelectorAll('#pkg-grid .pkg-card');
   cards.forEach(card => {
-    const cardType = card.getAttribute('data-type') || '';
+    const cardTravel = card.getAttribute('data-travel') || '';
+    const cardMonth = card.getAttribute('data-month') || '';
     const cardPrice = card.getAttribute('data-price') || '';
     
-    const typeMatch = (typeFilter === 'all') || cardType.includes(typeFilter);
+    const travelMatch = (travelFilter === 'all') || cardTravel.includes(travelFilter);
+    const monthMatch = (monthFilter === 'all') || cardMonth.includes(monthFilter);
     const priceMatch = (priceFilter === 'all') || cardPrice.includes(priceFilter);
     
-    if (typeMatch && priceMatch) {
+    if (travelMatch && monthMatch && priceMatch) {
       card.style.display = '';
     } else {
       card.style.display = 'none';
@@ -91,7 +94,7 @@ function applyFilters() {
 
   // Track filter click
   if (window.AKUHTrack) {
-    window.AKUHTrack.event('ViewContent', { content_name: `Filter: Tipe=${typeFilter}, Harga=${priceFilter}` });
+    window.AKUHTrack.event('ViewContent', { content_name: `Filter: Travel=${travelFilter}, Bulan=${monthFilter}, Harga=${priceFilter}` });
   }
 }
 
