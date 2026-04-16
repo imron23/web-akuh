@@ -98,6 +98,45 @@ function applyFilters() {
   }
 }
 
+// ===== SELECT PACKAGE =====
+window.selectPackage = function(name, travel, hotelMakkah, hotelMadinah, maskapai, harga, tanggal, durasi) {
+  // Store data in hidden inputs
+  document.getElementById('selected-pkg-name').value = name;
+  document.getElementById('selected-pkg-travel').value = travel;
+  document.getElementById('selected-pkg-hotel-makkah').value = hotelMakkah;
+  document.getElementById('selected-pkg-hotel-madinah').value = hotelMadinah;
+  document.getElementById('selected-pkg-maskapai').value = maskapai;
+  document.getElementById('selected-pkg-harga').value = harga;
+  document.getElementById('selected-pkg-tanggal').value = tanggal;
+  document.getElementById('selected-pkg-durasi').value = durasi;
+
+  // Show banner
+  document.getElementById('banner-pkg-name').textContent = name;
+  document.getElementById('banner-pkg-details').innerHTML =
+    `✈️ ${maskapai} &nbsp;·&nbsp; ⏱ ${durasi} &nbsp;·&nbsp; 📅 ${tanggal}<br>` +
+    `🏨 Makkah: ${hotelMakkah}<br>` +
+    `🕌 Madinah: ${hotelMadinah}<br>` +
+    `💰 Mulai ${harga}`;
+  document.getElementById('selected-pkg-banner').style.display = 'block';
+
+  // Auto-set form-type to umrah
+  const formType = document.getElementById('form-type');
+  if (formType) formType.value = 'umrah';
+
+  // Track
+  if (window.AKUHTrack) {
+    window.AKUHTrack.event('ViewContent', { content_name: `Paket Dipilih: ${name}` });
+  }
+};
+
+window.clearSelectedPackage = function() {
+  ['selected-pkg-name','selected-pkg-travel','selected-pkg-hotel-makkah','selected-pkg-hotel-madinah',
+   'selected-pkg-maskapai','selected-pkg-harga','selected-pkg-tanggal','selected-pkg-durasi'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('selected-pkg-banner').style.display = 'none';
+};
+
 // ===== SCROLL ANIMATION (Intersection Observer) =====
 const animEls = document.querySelectorAll('.anim-fade');
 const observer = new IntersectionObserver((entries) => {
@@ -247,6 +286,18 @@ async function submitWizard(e) {
   const paspor = document.getElementById('form-paspor').value;
   const jamaahCount = parseInt(document.getElementById('form-jamaah').value) || 1;
 
+  // Selected package data
+  const selectedPkg = {
+    name: document.getElementById('selected-pkg-name').value,
+    travel: document.getElementById('selected-pkg-travel').value,
+    hotelMakkah: document.getElementById('selected-pkg-hotel-makkah').value,
+    hotelMadinah: document.getElementById('selected-pkg-hotel-madinah').value,
+    maskapai: document.getElementById('selected-pkg-maskapai').value,
+    harga: document.getElementById('selected-pkg-harga').value,
+    tanggal: document.getElementById('selected-pkg-tanggal').value,
+    durasi: document.getElementById('selected-pkg-durasi').value,
+  };
+
   // Collect profiles
   const profiles = [];
   const rels = document.querySelectorAll('.jamaah-rel');
@@ -277,7 +328,15 @@ async function submitWizard(e) {
         jamaah: jamaahCount,
         profiles,
         source: isLansia ? 'wizard-lansia' : 'wizard',
-        pageUrl: window.location.href
+        pageUrl: window.location.href,
+        selectedPackage: selectedPkg.name || null,
+        packageTravel: selectedPkg.travel || null,
+        packageHotelMakkah: selectedPkg.hotelMakkah || null,
+        packageHotelMadinah: selectedPkg.hotelMadinah || null,
+        packageMaskapai: selectedPkg.maskapai || null,
+        packageHarga: selectedPkg.harga || null,
+        packageTanggal: selectedPkg.tanggal || null,
+        packageDurasi: selectedPkg.durasi || null,
       })
     });
     const data = await res.json();
@@ -300,13 +359,28 @@ async function submitWizard(e) {
   let profileText = profiles.map((p, i) => ` - J${i+1}: ${p.relation} (${p.age} thn)`).join('\n');
   if(!profileText) profileText = "- Belum diisi";
 
+  // Build package info block for WA
+  let pkgBlock = '';
+  if (selectedPkg.name) {
+    pkgBlock =
+      `\n*Paket yang Diminati:*\n` +
+      `Nama: ${selectedPkg.name}\n` +
+      `Travel: ${selectedPkg.travel}\n` +
+      `Maskapai: ${selectedPkg.maskapai} · ${selectedPkg.durasi}\n` +
+      `Tanggal: ${selectedPkg.tanggal}\n` +
+      `Hotel Makkah: ${selectedPkg.hotelMakkah}\n` +
+      `Hotel Madinah: ${selectedPkg.hotelMadinah}\n` +
+      `Harga: ${selectedPkg.harga}\n`;
+  }
+
   const msg = encodeURIComponent(
     `Assalamualaikum AKUH, saya tertarik untuk daftar *${targetType.toUpperCase()}*.\n\n` +
     `*Data Pendaftar:*\nNama: ${name}\nNo WA: ${phone}\nWilayah: ${wilayah}\nPaspor: ${pasporMap[paspor] || paspor}\n\n` +
     `*UTM Info:* ${utmParams.source} / ${utmParams.campaign}\n\n` +
     `*Rencana Berangkat:*\nWaktu: ${waktu}\nBudget: ${budgetMap[budget] || budget}/pax\n` +
-    `Total Jamaah: ${jamaahCount} Orang\n\n*Profil Jamaah:*\n${profileText}\n\n` +
-    `Mohon info paket yang sesuai. Terima kasih!`
+    `Total Jamaah: ${jamaahCount} Orang\n\n*Profil Jamaah:*\n${profileText}\n` +
+    pkgBlock +
+    `\nMohon info paket yang sesuai. Terima kasih!`
   );
 
   window.open(`https://wa.me/${targetWaNumber}?text=${msg}`, '_blank');
