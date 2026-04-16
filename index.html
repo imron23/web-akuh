@@ -165,16 +165,25 @@
     </h2>
     <p class="section-subtitle">Harga transparan dari vendor resmi · Diperbarui setiap minggu</p>
     <div class="pkg-filters" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;align-items:center;">
-      <select id="filter-type" class="filter-btn" style="padding:10px 16px;outline:none;" onchange="applyFilters()">
-        <option value="all">🕌 Semua Paket (Umrah &amp; Haji)</option>
-        <option value="umrah">Umrah Saja</option>
-        <option value="haji">Haji Saja</option>
+      <select id="filter-travel" class="filter-btn" style="padding:10px 16px;outline:none;" onchange="applyFilters()">
+        <option value="all">🏢 Semua Travel</option>
+        <option value="khaybar">Khaybar</option>
+        <option value="himam">HIMAM</option>
+        <option value="kanomas">Kanomas</option>
+      </select>
+      <select id="filter-month" class="filter-btn" style="padding:10px 16px;outline:none;" onchange="applyFilters()">
+        <option value="all">📅 Semua Bulan Keberangkatan</option>
+        <option value="06">Juni 2026</option>
+        <option value="07">Juli 2026</option>
+        <option value="08">Agustus 2026</option>
+        <option value="09">September 2026</option>
+        <option value="10">Oktober 2026</option>
       </select>
       <select id="filter-price" class="filter-btn" style="padding:10px 16px;outline:none;" onchange="applyFilters()">
         <option value="all">💰 Semua Range Harga</option>
-        <option value="under25">&lt; Rp 25 Juta</option>
-        <option value="25to35">Rp 25 Juta - Rp 35 Juta</option>
-        <option value="over35">&gt; Rp 35 Juta (Premium)</option>
+        <option value="under30">&lt; Rp 30 Juta (Ekonomis)</option>
+        <option value="30to38">Rp 30 Juta - Rp 38 Juta (Standar)</option>
+        <option value="over38">&gt; Rp 38 Juta (Premium / VIP)</option>
       </select>
     </div>
     <div class="pkg-grid" id="pkg-grid">
@@ -198,8 +207,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Snood Ajyad</li>
-            <li>Hotel Madinah: Concord Madinah</li>
+            <li>Hotel Makkah: Snood Ajyad ⭐⭐⭐ (~290m)</li>
+            <li>Hotel Madinah: Concord Madinah ⭐⭐⭐ (~800m)</li>
             <li>Harga Kompetitif</li><li>Tidak Termasuk Kereta Cepat</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket Khaybar'">
@@ -227,8 +236,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Pullman</li>
-            <li>Hotel Madinah: Front Taiba</li>
+            <li>Hotel Makkah: Pullman ZamZam ⭐⭐⭐⭐⭐ (~300m)</li>
+            <li>Hotel Madinah: Front Taiba ⭐⭐⭐⭐⭐ (~350m)</li>
             <li>Hotel VIP</li><li>Tidak Termasuk Kereta Cepat</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket Khaybar'">
@@ -256,8 +265,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Elaf Diamond</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Elaf Diamond ⭐⭐⭐⭐ (~350m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -285,8 +294,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Azka Safa</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Azka Safa ⭐⭐⭐⭐⭐ (~150m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -314,8 +323,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Shofwah</li>
-            <li>Hotel Madinah: Ruve</li>
+            <li>Hotel Makkah: Shofwah ⭐⭐⭐⭐⭐ (~50m)</li>
+            <li>Hotel Madinah: Ruve ⭐⭐⭐ (~630m)</li>
             <li>Kereta Cepat Haramain</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -343,8 +352,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Snood (setaraf)</li>
-            <li>Hotel Madinah: Artal (setaraf)</li>
+            <li>Hotel Makkah: Snood (setaraf) ⭐⭐⭐ (~290m)</li>
+            <li>Hotel Madinah: Artal (setaraf) ⭐⭐⭐ (~650m)</li>
             <li>Kereta Cepat Haramain</li><li>City Tour Thaif + Museum Wahyu</li><li>Makan Al Romansiah</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket Kanomas'">
@@ -372,8 +381,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Hilton Suite</li>
-            <li>Hotel Madinah: Al Aqeeq</li>
+            <li>Hotel Makkah: Hilton Suite ⭐⭐⭐⭐⭐ (~400m)</li>
+            <li>Hotel Madinah: Al Aqeeq ⭐⭐⭐⭐⭐ (~450m)</li>
             <li>Kereta Cepat Haramain</li><li>City Tour Thaif + Museum Wahyu</li><li>Makan Al Romansiah</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket Kanomas'">
@@ -401,8 +410,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Elaf Diamond</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Elaf Diamond ⭐⭐⭐⭐ (~350m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>2x Shalat Jum'at</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -430,8 +439,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Azka Safa</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Azka Safa ⭐⭐⭐⭐⭐ (~150m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>2x Shalat Jum'at</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -459,8 +468,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Shofwah</li>
-            <li>Hotel Madinah: Ruve</li>
+            <li>Hotel Makkah: Shofwah ⭐⭐⭐⭐⭐ (~50m)</li>
+            <li>Hotel Madinah: Ruve ⭐⭐⭐ (~630m)</li>
             <li>Kereta Cepat Haramain</li><li>2x Shalat Jum'at</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -488,8 +497,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Hilton Suite</li>
-            <li>Hotel Madinah: Al Aqeeq</li>
+            <li>Hotel Makkah: Hilton Suite ⭐⭐⭐⭐⭐ (~400m)</li>
+            <li>Hotel Madinah: Al Aqeeq ⭐⭐⭐⭐⭐ (~450m)</li>
             <li>Kereta Cepat Haramain</li><li>City Tour Thaif + Museum Wahyu</li><li>Makan Al Romansiah</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket Kanomas'">
@@ -517,8 +526,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Elaf Diamond</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Elaf Diamond ⭐⭐⭐⭐ (~350m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas Perang Badar</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -546,8 +555,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Azka Safa</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Azka Safa ⭐⭐⭐⭐⭐ (~150m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas Perang Badar</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -575,8 +584,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Shofwah</li>
-            <li>Hotel Madinah: Ruve</li>
+            <li>Hotel Makkah: Shofwah ⭐⭐⭐⭐⭐ (~50m)</li>
+            <li>Hotel Madinah: Ruve ⭐⭐⭐ (~630m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas Perang Badar</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -604,8 +613,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Elaf Diamond</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Elaf Diamond ⭐⭐⭐⭐ (~350m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -633,8 +642,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Azka Safa</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Azka Safa ⭐⭐⭐⭐⭐ (~150m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -662,8 +671,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Shofwah</li>
-            <li>Hotel Madinah: Ruve</li>
+            <li>Hotel Makkah: Shofwah ⭐⭐⭐⭐⭐ (~50m)</li>
+            <li>Hotel Madinah: Ruve ⭐⭐⭐ (~630m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -691,8 +700,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Hilton Suite</li>
-            <li>Hotel Madinah: Al Aqeeq</li>
+            <li>Hotel Makkah: Hilton Suite ⭐⭐⭐⭐⭐ (~400m)</li>
+            <li>Hotel Madinah: Al Aqeeq ⭐⭐⭐⭐⭐ (~450m)</li>
             <li>Kereta Cepat Haramain</li><li>City Tour Thaif + Museum Wahyu</li><li>Makan Al Romansiah</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket Kanomas'">
@@ -720,8 +729,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Elaf Diamond</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Elaf Diamond ⭐⭐⭐⭐ (~350m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -749,8 +758,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Azka Safa</li>
-            <li>Hotel Madinah: Sanabel</li>
+            <li>Hotel Makkah: Azka Safa ⭐⭐⭐⭐⭐ (~150m)</li>
+            <li>Hotel Madinah: Sanabel ⭐⭐⭐ (~500m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
@@ -778,8 +787,8 @@
           </div>
           <span class="pkg-cicilan">💰 DP Mulai Rp 5 Juta</span>
           <ul class="pkg-features">
-            <li>Hotel Makkah: Shofwah</li>
-            <li>Hotel Madinah: Ruve</li>
+            <li>Hotel Makkah: Shofwah ⭐⭐⭐⭐⭐ (~50m)</li>
+            <li>Hotel Madinah: Ruve ⭐⭐⭐ (~630m)</li>
             <li>Kereta Cepat Haramain</li><li>Napak Tilas</li>
           </ul>
           <a href="#cta-form" class="btn btn-primary btn-full pkg-btn" onclick="document.getElementById('form-waktu').value='Tanya Paket HIMAM'">
