@@ -997,34 +997,64 @@ function exportCSV() {
   API(`/api/leads?${params}`)
     .then(r => r.json())
     .then(({ data }) => {
-      const cols = ['id', 'name', 'phone', 'wilayah', 'targetType', 'budget', 'waktu', 'paspor', 'jamaah', 'status', 'source', 'utm_source', 'utm_medium', 'utm_campaign', 'createdAt', 'ip', 'userAgent', 'pageUrl'];
-      const header = [...cols.map(c => c.toUpperCase()), 'PROFILES_DETAIL'].join(',');
-      
+      // All columns in export
+      const cols = [
+        { key: 'id',              label: 'ID' },
+        { key: 'name',            label: 'NAMA' },
+        { key: 'phone',           label: 'NO_WA' },
+        { key: 'wilayah',         label: 'WILAYAH' },
+        { key: 'targetType',      label: 'TARGET' },
+        { key: 'waktu',           label: 'RENCANA_BERANGKAT', fn: waktuLabel },
+        { key: 'budget',          label: 'BUDGET', fn: budgetLabel },
+        { key: 'paspor',          label: 'PASPOR' },
+        { key: 'jamaah',          label: 'JML_JAMAAH' },
+        { key: 'status',          label: 'STATUS' },
+        { key: 'source',          label: 'SUMBER_FORM' },
+        // Package fields
+        { key: 'selectedPackage',      label: 'PAKET_DIPILIH' },
+        { key: 'packageTravel',        label: 'TRAVEL' },
+        { key: 'packageMaskapai',      label: 'MASKAPAI' },
+        { key: 'packageDurasi',        label: 'DURASI' },
+        { key: 'packageTanggal',       label: 'TGL_BERANGKAT_PAKET' },
+        { key: 'packageHotelMakkah',   label: 'HOTEL_MAKKAH' },
+        { key: 'packageHotelMadinah',  label: 'HOTEL_MADINAH' },
+        { key: 'packageHarga',         label: 'HARGA_PAKET' },
+        // UTM & meta
+        { key: 'utm_source',    label: 'UTM_SOURCE' },
+        { key: 'utm_medium',    label: 'UTM_MEDIUM' },
+        { key: 'utm_campaign',  label: 'UTM_CAMPAIGN' },
+        { key: 'utm_content',   label: 'UTM_CONTENT' },
+        { key: 'pageUrl',       label: 'PAGE_URL' },
+        { key: 'ip',            label: 'IP' },
+        { key: 'createdAt',     label: 'TGL_MASUK' },
+      ];
+
+      const header = [...cols.map(c => c.label), 'PROFIL_JAMAAH_DETAIL'].join(',');
+
       const rows = data.map(l => {
-        // Build detailed profiles string
-        const profileDetail = (l.profiles || []).map((p, idx) => `J${idx+1}:${p.relation}(${p.age}th)`).join(' | ');
-        
+        const profileDetail = (l.profiles || [])
+          .map((p, idx) => `J${idx+1}:${p.relation}(${p.age}th)`)
+          .join(' | ');
+
         const row = cols.map(c => {
-          let val = l[c] || '';
-          // Format specific fields if needed
-          if (c === 'budget') val = budgetLabel(val);
-          if (c === 'waktu') val = waktuLabel(val);
-          return `"${String(val).replace(/"/g, '""')}"`;
+          let val = l[c.key];
+          if (c.fn) val = c.fn(val);
+          return `"${String(val != null ? val : '').replace(/"/g, '""')}"`;
         });
-        
+
         row.push(`"${profileDetail.replace(/"/g, '""')}"`);
         return row.join(',');
       });
 
       const csv = [header, ...rows].join('\n');
-      const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' }); // Add BOM for Excel compatibility
+      const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `leads-akuh-lengkap-${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `leads-akuh-${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
       URL.revokeObjectURL(url);
-      toast('📥 Data lengkap berhasil diekspor!');
+      toast(`📥 ${data.length} leads diekspor (${cols.length + 1} kolom)!`);
     });
 }
 
