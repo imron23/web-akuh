@@ -223,7 +223,10 @@ ul { list-style: none; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('hero-kabah.png') center/cover no-repeat;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: url('assets/masjid_nabawi_hero.png') center/cover no-repeat;
 }
 .hero-overlay {
   position: absolute;
