@@ -207,11 +207,26 @@
       font-size:10px;font-weight:800;color:var(--text-muted);text-transform:uppercase;
       letter-spacing:.8px;border-bottom:1px solid var(--border);
     }
-    tbody td{padding:13px 16px;font-size:13px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+    tbody td{padding:8px 12px;font-size:12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
     tbody tr:last-child td{border-bottom:none}
     tbody tr:hover td{background:var(--primary-light)}
-    .td-name{font-weight:700;font-size:14px;color:var(--text)}
-    .td-phone{font-size:12px;color:var(--text-muted);margin-top:2px}
+    .td-name{font-weight:700;font-size:13px;color:var(--text)}
+    .td-phone{font-size:11px;color:var(--text-muted);margin-top:2px}
+    .chip{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
+    .chip-blue{background:#EFF6FF;color:#3B82F6}
+    .chip-green{background:#F0FDF4;color:#16A34A}
+    .chip-gray{background:#F1F5F9;color:#64748B}
+    /* Detail drawer */
+    .detail-row{display:none;background:var(--bg)}
+    .detail-row.open{display:table-row}
+    .detail-inner{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;padding:12px 14px}
+    .detail-cell{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+    .detail-cell-label{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .detail-cell-val{font-size:12px;font-weight:600;color:var(--text);line-height:1.5}
+    .detail-pkg-box{grid-column:1/-1;background:linear-gradient(135deg,#e8f5fd,#daf0fa);border:1.5px solid #1B9FD4;border-radius:8px;padding:10px 14px}
+    .btn-detail{background:none;border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;color:var(--text-muted);cursor:pointer;transition:.15s}
+    .btn-detail:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .btn-detail.open{background:var(--primary);color:#fff;border-color:var(--primary)}
     .badge-status{
       display:inline-flex;align-items:center;gap:4px;padding:3px 9px;
       border-radius:20px;font-size:11px;font-weight:700;
@@ -445,10 +460,9 @@
                 <th>Target</th>
                 <th>Identitas &amp; Kontak</th>
                 <th>Budget</th>
-                <th>Paspor</th>
-                <th>Jamaah</th>
                 <th>Status</th>
                 <th>Tgl. Masuk</th>
+                <th></th>
               </tr>
             </thead>
             <tbody id="leads-tbody">
@@ -802,51 +816,113 @@ function renderTable(leads, total) {
 
   const offset = (currentPage - 1) * limit;
   tbody.innerHTML = leads.map((l, i) => {
-    let profileStr = '';
+    const rowId = `row-${l.id}`;
+    const detailId = `detail-${l.id}`;
+
+    // Paspor chip
+    const pasporChip = {'ready':'✅ Paspor Ada','mati':'⚠️ Paspor Mati','belum':'❌ Belum Ada'}[l.paspor] || l.paspor || '-';
+    const pasporColor = l.paspor === 'ready' ? 'chip-green' : l.paspor === 'mati' ? 'chip' : 'chip-gray';
+
+    // Profiles short
+    let profileShort = '';
     if (l.profiles && l.profiles.length > 0) {
-      profileStr = l.profiles.map((p, idx) => `J${idx+1}: ${p.relation} (${p.age}thn)`).join('<br/>');
+      profileShort = l.profiles.map((p, idx) => `J${idx+1}:${p.relation}(${p.age}th)`).join(' · ');
     }
-    
-    return `
-    <tr id="row-${l.id}">
-      <td style="color:#aaa;font-size:12px">${offset + i + 1}</td>
-      <td>
-        <strong style="color:var(--primary);text-transform:uppercase;font-size:13px;">${escHtml(l.targetType || 'Umrah')}</strong><br/>
-        <span style="font-size:12px;color:var(--text2)">${waktuLabel(l.waktu)}</span>
-      </td>
-      <td>
-        <div class="td-name">${escHtml(l.name)}</div>
-        <div class="td-phone">
-          <a href="https://wa.me/${l.phone.replace(/\D/g,'')}?text=Assalamualaikum+${encodeURIComponent(l.name)},+ini+dari+AKUH,+mau+follow+up+konsultasi+${encodeURIComponent(l.targetType || 'umrah')}" target="_blank" class="btn-wa" style="margin-top:4px">
-            📱 ${escHtml(l.phone)}
-          </a>
+
+    // Package info for detail
+    const hasPkg = !!(l.selectedPackage);
+    const pkgBlock = hasPkg ? `
+      <div class="detail-pkg-box" style="margin-bottom:10px">
+        <div style="font-size:10px;font-weight:800;color:#1B9FD4;letter-spacing:.5px;margin-bottom:4px">📦 PAKET DIMINATI</div>
+        <div style="font-size:13px;font-weight:800;color:#1A1A2E">${escHtml(l.selectedPackage)}</div>
+        <div style="font-size:11px;color:#3A3A50;margin-top:4px;line-height:1.7">
+          ✈️ ${escHtml(l.packageMaskapai||'-')} · ⏱ ${escHtml(l.packageDurasi||'-')} · 📅 ${escHtml(l.packageTanggal||'-')}<br>
+          🏨 Makkah: ${escHtml(l.packageHotelMakkah||'-')}<br>
+          🕌 Madinah: ${escHtml(l.packageHotelMadinah||'-')}<br>
+          💰 ${escHtml(l.packageHarga||'-')}
         </div>
-        <div style="font-size:11px;color:var(--accent);font-weight:600;margin-top:4px">📍 ${escHtml(l.wilayah || '-')}</div>
+      </div>` : '';
+
+    // Profiles detail
+    const profileFull = l.profiles && l.profiles.length > 0
+      ? l.profiles.map((p,idx) => `J${idx+1}: ${p.relation} (${p.age} thn)`).join('<br>')
+      : '-';
+
+    return `
+    <tr id="${rowId}" style="cursor:default">
+      <td style="color:#aaa;font-size:11px;width:32px">${offset + i + 1}</td>
+      <td style="min-width:100px">
+        <strong style="color:var(--primary);text-transform:uppercase;font-size:12px;">${escHtml(l.targetType || 'Umrah')}</strong><br/>
+        <span style="font-size:11px;color:var(--text-muted)">${waktuLabel(l.waktu)}</span>
       </td>
-      <td><span class="badge-green" style="background:#e6f4ee;color:#0A7C4F;padding:3px 10px;border-radius:50px;font-size:12px;font-weight:600">${budgetLabel(l.budget)}</span></td>
-      <td style="font-size:12px;">${escHtml(l.paspor || '-')}</td>
-      <td>
-        <span style="font-size:13px;font-weight:700;">${l.jamaah || 1} Orang</span>
-        ${profileStr ? `<div style="font-size:11px;color:var(--text2);margin-top:4px;line-height:1.4">${profileStr}</div>` : ''}
+      <td style="min-width:160px">
+        <div class="td-name">${escHtml(l.name)}</div>
+        <a href="https://wa.me/${l.phone.replace(/\D/g,'')}?text=Assalamualaikum+${encodeURIComponent(l.name)},+ini+dari+AKUH" target="_blank" class="btn-wa" style="margin-top:3px;font-size:11px">
+          📱 ${escHtml(l.phone)}
+        </a>
+        <div style="font-size:10px;color:var(--primary);font-weight:600;margin-top:2px">📍 ${escHtml(l.wilayah || '-')}</div>
+        <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:3px">
+          <span class="chip chip-gray">${l.jamaah||1} Jamaah</span>
+          <span class="chip ${pasporColor}">${pasporChip}</span>
+          ${hasPkg ? '<span class="chip chip-blue">📦 Paket Dipilih</span>' : ''}
+        </div>
       </td>
+      <td><span style="background:#e6f4ee;color:#0A7C4F;padding:2px 9px;border-radius:50px;font-size:11px;font-weight:600">${budgetLabel(l.budget)}</span></td>
       <td>
-        <select class="status-select status-${l.status || 'baru'}" onchange="updateStatus('${l.id}', this.value, this)" style="margin-bottom:6px">
+        <select class="status-select status-${l.status || 'baru'}" onchange="updateStatus('${l.id}', this.value, this)" style="margin-bottom:4px;font-size:11px;padding:4px 6px">
           <option value="baru" ${l.status==='baru'?'selected':''}>🔵 Baru</option>
           <option value="proses" ${l.status==='proses'?'selected':''}>🟡 Proses</option>
           <option value="closing" ${l.status==='closing'?'selected':''}>🟢 Closing</option>
           <option value="batal" ${l.status==='batal'?'selected':''}>🔴 Batal</option>
-        </select>
-        <br/>
-        <button class="btn-delete" onclick="deleteLead('${l.id}')" title="Hapus lead" style="font-size:12px;color:var(--red);">🗑️ Hapus</button>
+        </select><br/>
+        <button class="btn-delete" onclick="deleteLead('${l.id}')" style="font-size:11px">🗑️ Hapus</button>
       </td>
-      <td class="td-date">
-        <span style="display:block;font-weight:700">${fmtDate(l.createdAt)}</span>
-        <span style="font-size:10px;color:var(--primary);background:var(--primary-light);padding:2px 6px;border-radius:4px">
-          ${escHtml(l.utm_source || 'organic')} / ${escHtml(l.utm_campaign || '-')}
+      <td class="td-date" style="min-width:100px">
+        ${fmtDate(l.createdAt)}
+        <span style="font-size:10px;color:var(--primary);background:var(--primary-light);padding:1px 5px;border-radius:4px;display:inline-block;margin-top:2px">
+          ${escHtml(l.utm_source || 'organic')}
         </span>
       </td>
+      <td style="width:60px">
+        <button class="btn-detail" id="btn-det-${l.id}" onclick="toggleDetail('${l.id}')" title="Lihat detail lengkap">▼ Detail</button>
+      </td>
     </tr>
-    `
+    <tr class="detail-row" id="${detailId}">
+      <td colspan="7" style="padding:0;border-bottom:2px solid var(--primary)">
+        <div class="detail-inner">
+          ${pkgBlock}
+          <div class="detail-cell">
+            <div class="detail-cell-label">📋 Target</div>
+            <div class="detail-cell-val">${escHtml(l.targetType||'-')} · ${waktuLabel(l.waktu)}</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-cell-label">💰 Budget</div>
+            <div class="detail-cell-val">${budgetLabel(l.budget)}</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-cell-label">🛂 Paspor</div>
+            <div class="detail-cell-val">${escHtml(l.paspor||'-')}</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-cell-label">👥 Profil Jamaah</div>
+            <div class="detail-cell-val">${profileFull}</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-cell-label">📡 Sumber / UTM</div>
+            <div class="detail-cell-val">${escHtml(l.source||'-')}<br><span style="color:var(--text-muted);font-size:11px">${escHtml(l.utm_source||'-')} / ${escHtml(l.utm_campaign||'-')}</span></div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-cell-label">🌐 URL Halaman</div>
+            <div class="detail-cell-val" style="font-size:10px;word-break:break-all">${escHtml(l.pageUrl||'-')}</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-cell-label">🕒 Waktu Masuk</div>
+            <div class="detail-cell-val">${(new Date(l.createdAt)).toLocaleString('id-ID')}</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    `;
   }).join('');
 
   // Pagination info
@@ -873,6 +949,15 @@ function renderTable(leads, total) {
 
 function escHtml(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toggleDetail(id) {
+  const detailRow = document.getElementById(`detail-${id}`);
+  const btn = document.getElementById(`btn-det-${id}`);
+  const isOpen = detailRow.classList.contains('open');
+  detailRow.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.textContent = isOpen ? '▼ Detail' : '▲ Tutup';
 }
 
 // ── Update status ──
