@@ -190,22 +190,27 @@ let waIndex = 0;
 
 // POST /api/leads  – simpan lead dari form LP
 app.post('/api/leads', async (req, res) => {
-  const { name, phone, budget, waktu, jamaah, source, pageUrl, paspor, targetType } = req.body;
+  const { name, phone } = req.body;
   if (!name || !phone) {
     return res.status(400).json({ error: 'Nama dan nomor WA wajib diisi.' });
   }
 
-  const lead = {
-    id: crypto.randomUUID(),
+  const baseLead = {
+    ...req.body,
     name: name.trim(),
-    phone: phone.trim(),
-    targetType: targetType || '-',  // Umrah / Haji
-    budget: budget || '-',
-    waktu: waktu || '-',
-    jamaah: jamaah || 1, // Bisa berupa object/array di iterasi mendatang, tapi set basic default 1
-    paspor: paspor || '-',
-    source: source || 'form',
-    pageUrl: pageUrl || '',
+    phone: phone.trim()
+  };
+
+  const lead = {
+    ...baseLead,
+    id: crypto.randomUUID(),
+    targetType: req.body.targetType || '-',
+    budget: req.body.budget || '-',
+    waktu: req.body.waktu || '-',
+    jamaah: req.body.jamaah || 1,
+    paspor: req.body.paspor || '-',
+    source: req.body.source || 'form',
+    pageUrl: req.body.pageUrl || '',
     ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress || '',
     userAgent: req.headers['user-agent'] || '',
     createdAt: new Date().toISOString(),
