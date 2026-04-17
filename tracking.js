@@ -17,13 +17,14 @@
   const GTM_ID     = cfg.gtmId     || 'GTM-XXXXXXX';
   const META_PX    = cfg.metaPixel  || null;
   const TIKTOK_PX  = cfg.tiktokPixel || null;
+  const GA4_ID     = cfg.ga4Id      || null;
   const API_BASE   = cfg.apiBase    || '';
 
   // ──────────────────────────────────────────────────────────
   // 1. GOOGLE TAG MANAGER
   // ──────────────────────────────────────────────────────────
   function initGTM(id) {
-    if (!id || id === 'GTM-XXXXXXX') return;
+    if (!id || id.includes('XXXXX')) return;
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
     const s = document.createElement('script');
@@ -35,6 +36,23 @@
     ns.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
     document.body.prepend(ns);
     console.log('[AKUH Tracking] GTM loaded:', id);
+  }
+
+  // ──────────────────────────────────────────────────────────
+  // 1b. GOOGLE ANALYTICS 4 (NATIVE)
+  // ──────────────────────────────────────────────────────────
+  function initGA4(id) {
+    if (!id || id.includes('XXXXX')) return;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', id);
+    console.log('[AKUH Tracking] GA4 loaded:', id);
   }
 
   // ──────────────────────────────────────────────────────────
@@ -93,6 +111,18 @@
       // GTM dataLayer push
       if (window.dataLayer) {
         window.dataLayer.push({ event, ...payload });
+      }
+
+      // GA4 gtag push
+      if (typeof window.gtag === 'function') {
+        const ga4Map = {
+          'Lead': 'generate_lead',
+          'ViewContent': 'view_item',
+          'InitiateCheckout': 'begin_checkout',
+          'Contact': 'contact',
+          'PageView': 'page_view',
+        };
+        window.gtag('event', ga4Map[event] || event, payload);
       }
 
       // Meta Pixel
@@ -169,6 +199,7 @@
   // ──────────────────────────────────────────────────────────
   function init() {
     initGTM(GTM_ID);
+    initGA4(GA4_ID);
     initMetaPixel(META_PX);
     initTikTokPixel(TIKTOK_PX);
     AKUHTrack.pageView();

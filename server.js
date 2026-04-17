@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
       gtmId: process.env.GTM_ID || '',
       metaPixel: process.env.META_PIXEL_ID || '',
       tiktokPixel: process.env.TIKTOK_PIXEL_ID || '',
+      ga4Id: process.env.GA4_ID || '',
       apiBase: ''
     });
 
