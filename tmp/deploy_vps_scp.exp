@@ -1,0 +1,19 @@
+#!/usr/bin/expect -f
+set timeout -1
+set password "gha-sj5-u6e-pdp"
+spawn ssh -o StrictHostKeyChecking=no ubuntu@43.157.202.165
+expect "password:"
+send "$password\r"
+expect "$ "
+send "cd ~/web-akuh\r"
+expect "$ "
+send "sudo docker build -t web-akuh .\r"
+expect "$ "
+send "sudo docker stop web-akuh || true\r"
+expect "$ "
+send "sudo docker rm web-akuh || true\r"
+expect "$ "
+send "sudo docker run -d -p 4000:3000 --name web-akuh -v \$(pwd)/data:/app/data --env-file .env web-akuh\r"
+expect "$ "
+send "exit\r"
+expect eof

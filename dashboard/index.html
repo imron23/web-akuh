@@ -11,18 +11,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root{
-      /* Colors */
-      --primary:#0A7C4F; --primary-hover:#085e3b; --primary-light:rgba(10,124,79,0.08);
-      --indigo:#6366F1; --pink:#EC4899; --amber:#F59E0B; --emerald:#10B981; --rose:#F43F5E;
+      /* Colors – Blue+Gold AKUH */
+      --primary:#1B9FD4; --primary-hover:#157db0; --primary-light:rgba(27,159,212,0.08);
+      --indigo:#6366F1; --pink:#EC4899; --amber:#C9A227; --emerald:#10B981; --rose:#F43F5E;
       /* Surfaces */
-      --bg:#F1F5F9; --sidebar:#0D1117; --sidebar-hover:rgba(255,255,255,0.06); --card:#FFFFFF;
+      --bg:#F0F6FA; --sidebar:#071828; --sidebar-hover:rgba(255,255,255,0.06); --card:#FFFFFF;
       /* Text */
       --text:#0D1117; --text-muted:#6B7280; --text-inv:#F9FAFB;
       /* UI */
-      --border:#E5E7EB; --border-strong:#D1D5DB;
+      --border:#E2EAF0; --border-strong:#C8D6E0;
       --shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.04);
       --shadow-md:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
-      --radius:10px; --radius-lg:16px;
+      --radius:8px; --radius-lg:12px;
       --transition:.18s cubic-bezier(.4,0,.2,1);
     }
     [data-theme="dark"]{
@@ -143,94 +143,120 @@
     .icon-btn:hover{border-color:var(--border-strong);color:var(--text)}
 
     /* ── Main Content ── */
-    .main-content{flex:1;overflow-y:auto;padding:24px 28px;background:var(--bg)}
+    .main-content{flex:1;overflow-y:auto;padding:16px 20px;background:var(--bg)}
 
-    /* ── Stats Cards ── */
-    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+    /* ── Stats Cards – Compact ── */
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
     .stat-card{
-      background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);
-      padding:20px 24px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      padding:12px 16px;display:flex;align-items:center;gap:10px;position:relative;overflow:hidden;
     }
     .stat-card::before{
       content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;
       background:radial-gradient(circle at 90% 10%,var(--primary-light),transparent 60%);
     }
     .stat-icon{
-      width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-      font-size:20px;flex-shrink:0;
+      width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+      font-size:16px;flex-shrink:0;
     }
-    .stat-icon.green{background:rgba(10,124,79,.1);color:var(--primary)}
+    .stat-icon.green{background:rgba(27,159,212,.1);color:var(--primary)}
     .stat-icon.indigo{background:rgba(99,102,241,.1);color:var(--indigo)}
-    .stat-icon.amber{background:rgba(245,158,11,.1);color:var(--amber)}
+    .stat-icon.amber{background:rgba(201,162,39,.12);color:var(--amber)}
     .stat-body{flex:1}
-    .stat-num{font-size:28px;font-weight:800;color:var(--text);line-height:1}
-    .stat-label{font-size:11px;font-weight:600;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+    .stat-num{font-size:22px;font-weight:800;color:var(--text);line-height:1}
+    .stat-label{font-size:10px;font-weight:600;color:var(--text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
 
-    /* ── Toolbar ── */
+    /* ── Toolbar – Compact ── */
     .toolbar{
-      display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-      background:var(--card);padding:10px 12px;border-radius:var(--radius);
-      border:1px solid var(--border);margin-bottom:16px;
+      display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+      background:var(--card);padding:7px 10px;border-radius:var(--radius);
+      border:1px solid var(--border);margin-bottom:10px;
     }
-    .toolbar-sep{width:1px;height:20px;background:var(--border);margin:0 4px;flex-shrink:0}
+    .toolbar-sep{width:1px;height:18px;background:var(--border);margin:0 2px;flex-shrink:0}
     .search-input{
-      flex:1;min-width:180px;padding:8px 12px;background:var(--bg);
-      border:1px solid var(--border);border-radius:7px;
-      font-size:13px;color:var(--text);outline:none;
+      flex:1;min-width:160px;padding:6px 10px;background:var(--bg);
+      border:1px solid var(--border);border-radius:6px;
+      font-size:12px;color:var(--text);outline:none;
     }
-    .search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(10,124,79,.08)}
+    .search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(27,159,212,.08)}
     .filter-select{
-      padding:8px 12px;background:var(--bg);border:1px solid var(--border);
-      border-radius:7px;font-size:13px;font-weight:500;color:var(--text);outline:none;cursor:pointer;
+      padding:6px 10px;background:var(--bg);border:1px solid var(--border);
+      border-radius:6px;font-size:12px;font-weight:500;color:var(--text);outline:none;cursor:pointer;
     }
-    .date-range-wrap{display:none;align-items:center;gap:6px}
+    .date-range-wrap{display:none;align-items:center;gap:5px}
     .date-range-wrap.active{display:flex}
-    .date-input{padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-size:12px;font-weight:600;color:var(--primary);background:var(--bg);outline:none}
+    .date-input{padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;color:var(--primary);background:var(--bg);outline:none}
     .btn-primary{
-      padding:8px 16px;background:var(--primary);color:#fff;border:none;
-      border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;
-      display:flex;align-items:center;gap:6px;transition:background .2s;
+      padding:6px 14px;background:var(--primary);color:#fff;border:none;
+      border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;
+      display:flex;align-items:center;gap:5px;transition:background .2s;
     }
     .btn-primary:hover{background:var(--primary-hover)}
     .btn-amber{
-      padding:8px 16px;background:var(--amber);color:#fff;border:none;
-      border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;
-      display:flex;align-items:center;gap:6px;transition:opacity .2s;
+      padding:6px 14px;background:var(--amber);color:#fff;border:none;
+      border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;
+      display:flex;align-items:center;gap:5px;transition:opacity .2s;
     }
     .btn-amber:hover{opacity:.9}
 
-    /* ── Table ── */
-    .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+    /* ── Table – Compact ── */
+    .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
     table{width:100%;border-collapse:collapse}
     thead th{
-      background:var(--bg);padding:10px 16px;text-align:left;
+      background:var(--bg);padding:7px 10px;text-align:left;
       font-size:10px;font-weight:800;color:var(--text-muted);text-transform:uppercase;
-      letter-spacing:.8px;border-bottom:1px solid var(--border);
+      letter-spacing:.7px;border-bottom:1px solid var(--border);
     }
-    tbody td{padding:8px 12px;font-size:12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+    tbody td{padding:5px 9px;font-size:12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
     tbody tr:last-child td{border-bottom:none}
     tbody tr:hover td{background:var(--primary-light)}
-    .td-name{font-weight:700;font-size:13px;color:var(--text)}
-    .td-phone{font-size:11px;color:var(--text-muted);margin-top:2px}
-    .chip{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
+    .td-name{font-weight:700;font-size:12px;color:var(--text)}
+    .chip{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.2px}
     .chip-blue{background:#EFF6FF;color:#3B82F6}
     .chip-green{background:#F0FDF4;color:#16A34A}
     .chip-gray{background:#F1F5F9;color:#64748B}
-    /* Detail drawer */
+    .chip-sky{background:#e0f2fe;color:#0369a1}
+    .chip-orange{background:#fff7ed;color:#c2410c}
+
+    /* ── Detail Drawer – Rich ── */
     .detail-row{display:none;background:var(--bg)}
     .detail-row.open{display:table-row}
-    .detail-inner{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;padding:12px 14px}
-    .detail-cell{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
-    .detail-cell-label{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
-    .detail-cell-val{font-size:12px;font-weight:600;color:var(--text);line-height:1.5}
-    .detail-pkg-box{grid-column:1/-1;background:linear-gradient(135deg,#e8f5fd,#daf0fa);border:1.5px solid #1B9FD4;border-radius:8px;padding:10px 14px}
-    .btn-detail{background:none;border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;color:var(--text-muted);cursor:pointer;transition:.15s}
+    .detail-wrap{padding:0 10px 12px}
+    /* section headers */
+    .detail-sec{
+      margin-top:10px;
+    }
+    .detail-sec-title{
+      font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
+      color:var(--text-muted);padding:4px 8px 6px;
+      border-left:3px solid var(--primary);margin-bottom:6px;
+      display:flex;align-items:center;gap:5px;
+    }
+    .detail-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px}
+    .detail-grid.wide{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+    .dk{
+      background:var(--card);border:1px solid var(--border);border-radius:7px;
+      padding:8px 10px;position:relative;
+    }
+    .dk-label{font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
+    .dk-val{font-size:11px;font-weight:600;color:var(--text);line-height:1.5;word-break:break-all}
+    .dk-val.mono{font-family:'Courier New',monospace;font-size:10px;color:#8B949E}
+    .dk-val.url{font-size:10px;color:var(--primary)}
+    .dk-full{grid-column:1/-1}
+    /* paket box */
+    .detail-pkg-box{
+      grid-column:1/-1;background:linear-gradient(135deg,#e8f5fd,#daf0fa);
+      border:1.5px solid var(--primary);border-radius:8px;padding:10px 14px;
+    }
+
+    .btn-detail{
+      background:none;border:1px solid var(--border);border-radius:5px;
+      padding:2px 9px;font-size:10px;font-weight:700;color:var(--text-muted);
+      cursor:pointer;transition:.15s;white-space:nowrap;
+    }
     .btn-detail:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
     .btn-detail.open{background:var(--primary);color:#fff;border-color:var(--primary)}
-    .badge-status{
-      display:inline-flex;align-items:center;gap:4px;padding:3px 9px;
-      border-radius:20px;font-size:11px;font-weight:700;
-    }
+
     .badge-baru{background:#EFF6FF;color:#3B82F6}
     .badge-proses{background:#FFFBEB;color:#D97706}
     .badge-closing{background:#F0FDF4;color:#16A34A}
@@ -240,17 +266,28 @@
     [data-theme="dark"] .badge-closing{background:rgba(22,163,74,.12)}
     [data-theme="dark"] .badge-batal{background:rgba(220,38,38,.12)}
     .status-select{
-      border:1px solid var(--border);background:var(--bg);font-size:12px;font-weight:600;
-      padding:5px 8px;border-radius:7px;cursor:pointer;color:var(--text);
+      border:1px solid var(--border);background:var(--bg);font-size:11px;font-weight:600;
+      padding:3px 6px;border-radius:6px;cursor:pointer;color:var(--text);
     }
-    .btn-delete{background:none;border:none;color:var(--rose);font-size:12px;cursor:pointer;padding:4px;opacity:.7}
+    .btn-delete{background:none;border:none;color:var(--rose);font-size:11px;cursor:pointer;padding:2px;opacity:.6}
     .btn-delete:hover{opacity:1}
     .btn-wa{
-      display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;
-      color:#16A34A;text-decoration:none;padding:3px 8px;background:rgba(22,163,74,.08);
-      border-radius:6px;margin-top:4px;
+      display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;
+      color:#16A34A;text-decoration:none;padding:2px 7px;background:rgba(22,163,74,.08);
+      border-radius:5px;
     }
     .btn-wa:hover{background:rgba(22,163,74,.15)}
+    /* notes input */
+    .notes-textarea{
+      width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:6px;
+      font-size:11px;color:var(--text);background:var(--bg);resize:vertical;
+      min-height:50px;font-family:inherit;outline:none;
+    }
+    .notes-textarea:focus{border-color:var(--primary)}
+    .btn-save-notes{
+      margin-top:4px;padding:3px 12px;background:var(--primary);color:#fff;
+      border:none;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;
+    }
 
     /* ── Pagination ── */
     .pagination{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--border)}
@@ -820,105 +857,130 @@ function renderTable(leads, total) {
     const detailId = `detail-${l.id}`;
 
     // Paspor chip
-    const pasporChip = {'ready':'✅ Paspor Ada','mati':'⚠️ Paspor Mati','belum':'❌ Belum Ada'}[l.paspor] || l.paspor || '-';
-    const pasporColor = l.paspor === 'ready' ? 'chip-green' : l.paspor === 'mati' ? 'chip' : 'chip-gray';
+    const pasporChip = {'ready':'✅ Ada','mati':'⚠️ Mati','belum':'❌ Belum'}[l.paspor] || l.paspor || '-';
+    const pasporColor = l.paspor === 'ready' ? 'chip-green' : l.paspor === 'mati' ? 'chip-orange' : 'chip-gray';
 
     // Profiles short
-    let profileShort = '';
-    if (l.profiles && l.profiles.length > 0) {
-      profileShort = l.profiles.map((p, idx) => `J${idx+1}:${p.relation}(${p.age}th)`).join(' · ');
-    }
-
-    // Package info for detail
+    const profileShort = (l.profiles||[]).map((p,idx)=>`J${idx+1}:${p.relation}(${p.age})`).join(' ');
     const hasPkg = !!(l.selectedPackage);
-    const pkgBlock = hasPkg ? `
-      <div class="detail-pkg-box" style="margin-bottom:10px">
-        <div style="font-size:10px;font-weight:800;color:#1B9FD4;letter-spacing:.5px;margin-bottom:4px">📦 PAKET DIMINATI</div>
-        <div style="font-size:13px;font-weight:800;color:#1A1A2E">${escHtml(l.selectedPackage)}</div>
-        <div style="font-size:11px;color:#3A3A50;margin-top:4px;line-height:1.7">
-          ✈️ ${escHtml(l.packageMaskapai||'-')} · ⏱ ${escHtml(l.packageDurasi||'-')} · 📅 ${escHtml(l.packageTanggal||'-')}<br>
-          🏨 Makkah: ${escHtml(l.packageHotelMakkah||'-')}<br>
-          🕌 Madinah: ${escHtml(l.packageHotelMadinah||'-')}<br>
-          💰 ${escHtml(l.packageHarga||'-')}
+
+    // ── DETAIL PANEL ──────────────────────────────────────
+    // Section 1: Package
+    const pkgSec = hasPkg ? `
+      <div class="detail-sec">
+        <div class="detail-sec-title">📦 Paket Diminati</div>
+        <div class="detail-pkg-box">
+          <div style="font-size:13px;font-weight:800;color:#0a3d5c;margin-bottom:6px">${escHtml(l.selectedPackage)}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;font-size:11px;color:#1a3a50">
+            <span>✈️ <b>Maskapai:</b> ${escHtml(l.packageMaskapai||'-')}</span>
+            <span>⏱ <b>Durasi:</b> ${escHtml(l.packageDurasi||'-')}</span>
+            <span>📅 <b>Tanggal:</b> ${escHtml(l.packageTanggal||'-')}</span>
+            <span>🏨 <b>Makkah:</b> ${escHtml(l.packageHotelMakkah||'-')}</span>
+            <span>🕌 <b>Madinah:</b> ${escHtml(l.packageHotelMadinah||'-')}</span>
+            <span>💰 <b>Harga:</b> ${escHtml(l.packageHarga||'-')}</span>
+          </div>
         </div>
       </div>` : '';
 
-    // Profiles detail
-    const profileFull = l.profiles && l.profiles.length > 0
-      ? l.profiles.map((p,idx) => `J${idx+1}: ${p.relation} (${p.age} thn)`).join('<br>')
-      : '-';
+    // Section 2: Form Data
+    const profileRows = (l.profiles||[]).map((p,idx)=>
+      `<div class="dk"><div class="dk-label">Jamaah ${idx+1}</div><div class="dk-val">${escHtml(p.relation)} · ${escHtml(p.age)} thn</div></div>`
+    ).join('');
+
+    const formSec = `
+      <div class="detail-sec">
+        <div class="detail-sec-title">📋 Data Form</div>
+        <div class="detail-grid">
+          <div class="dk"><div class="dk-label">Target Ibadah</div><div class="dk-val">${escHtml(l.targetType||'-')}</div></div>
+          <div class="dk"><div class="dk-label">Rencana Berangkat</div><div class="dk-val">${waktuLabel(l.waktu)}</div></div>
+          <div class="dk"><div class="dk-label">Budget</div><div class="dk-val">${budgetLabel(l.budget)}</div></div>
+          <div class="dk"><div class="dk-label">Paspor</div><div class="dk-val">${escHtml(l.paspor||'-')}</div></div>
+          <div class="dk"><div class="dk-label">Jumlah Jamaah</div><div class="dk-val">${l.jamaah||1} orang</div></div>
+          <div class="dk"><div class="dk-label">Wilayah</div><div class="dk-val">📍 ${escHtml(l.wilayah||'-')}</div></div>
+          ${profileRows}
+        </div>
+      </div>`;
+
+    // Section 3: UTM & Tracking
+    const utmSec = `
+      <div class="detail-sec">
+        <div class="detail-sec-title">📡 Tracking & UTM</div>
+        <div class="detail-grid">
+          <div class="dk"><div class="dk-label">Source Form</div><div class="dk-val"><span class="chip chip-sky">${escHtml(l.source||'form')}</span></div></div>
+          <div class="dk"><div class="dk-label">UTM Source</div><div class="dk-val">${escHtml(l.utm_source||'-')}</div></div>
+          <div class="dk"><div class="dk-label">UTM Medium</div><div class="dk-val">${escHtml(l.utm_medium||'-')}</div></div>
+          <div class="dk"><div class="dk-label">UTM Campaign</div><div class="dk-val">${escHtml(l.utm_campaign||'-')}</div></div>
+          <div class="dk"><div class="dk-label">UTM Content</div><div class="dk-val">${escHtml(l.utm_content||'-')}</div></div>
+          <div class="dk"><div class="dk-label">UTM Term</div><div class="dk-val">${escHtml(l.utm_term||'-')}</div></div>
+        </div>
+      </div>`;
+
+    // Section 4: Technical Data
+    const techSec = `
+      <div class="detail-sec">
+        <div class="detail-sec-title">🖥️ Data Teknis</div>
+        <div class="detail-grid wide">
+          <div class="dk"><div class="dk-label">IP Address</div><div class="dk-val mono">${escHtml(l.ip||'-')}</div></div>
+          <div class="dk"><div class="dk-label">Tanggal Masuk</div><div class="dk-val">${new Date(l.createdAt).toLocaleString('id-ID')}</div></div>
+          ${l.updatedAt ? `<div class="dk"><div class="dk-label">Terakhir Update</div><div class="dk-val">${new Date(l.updatedAt).toLocaleString('id-ID')}</div></div>` : ''}
+          <div class="dk dk-full"><div class="dk-label">Page URL</div><div class="dk-val url">${escHtml(l.pageUrl||'-')}</div></div>
+          <div class="dk dk-full"><div class="dk-label">User Agent</div><div class="dk-val mono">${escHtml(l.userAgent||'-')}</div></div>
+        </div>
+      </div>`;
+
+    // Section 5: Notes
+    const notesSec = `
+      <div class="detail-sec">
+        <div class="detail-sec-title">📝 Catatan Internal</div>
+        <div style="padding:0 0 4px">
+          <textarea class="notes-textarea" id="notes-${l.id}" placeholder="Tambah catatan untuk lead ini...">${escHtml(l.notes||'')}</textarea>
+          <button class="btn-save-notes" onclick="saveNotes('${l.id}')">💾 Simpan</button>
+        </div>
+      </div>`;
 
     return `
-    <tr id="${rowId}" style="cursor:default">
-      <td style="color:#aaa;font-size:11px;width:32px">${offset + i + 1}</td>
-      <td style="min-width:100px">
-        <strong style="color:var(--primary);text-transform:uppercase;font-size:12px;">${escHtml(l.targetType || 'Umrah')}</strong><br/>
-        <span style="font-size:11px;color:var(--text-muted)">${waktuLabel(l.waktu)}</span>
+    <tr id="${rowId}">
+      <td style="color:#aaa;font-size:10px;width:26px;padding-left:8px">${offset+i+1}</td>
+      <td style="min-width:90px">
+        <strong style="color:var(--primary);text-transform:uppercase;font-size:11px;letter-spacing:.3px">${escHtml(l.targetType||'Umrah')}</strong>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:1px">${waktuLabel(l.waktu)}</div>
       </td>
-      <td style="min-width:160px">
+      <td style="min-width:150px">
         <div class="td-name">${escHtml(l.name)}</div>
-        <a href="https://wa.me/${l.phone.replace(/\D/g,'')}?text=Assalamualaikum+${encodeURIComponent(l.name)},+ini+dari+AKUH" target="_blank" class="btn-wa" style="margin-top:3px;font-size:11px">
-          📱 ${escHtml(l.phone)}
-        </a>
-        <div style="font-size:10px;color:var(--primary);font-weight:600;margin-top:2px">📍 ${escHtml(l.wilayah || '-')}</div>
-        <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:3px">
-          <span class="chip chip-gray">${l.jamaah||1} Jamaah</span>
+        <a href="https://wa.me/${l.phone.replace(/\D/g,'')}?text=Assalamualaikum+${encodeURIComponent(l.name)},+ini+dari+AKUH" target="_blank" class="btn-wa">📱 ${escHtml(l.phone)}</a>
+        <div style="font-size:10px;color:var(--primary);font-weight:600;margin-top:1px">📍 ${escHtml(l.wilayah||'-')}</div>
+        <div style="margin-top:3px;display:flex;flex-wrap:wrap;gap:2px">
+          <span class="chip chip-gray">${l.jamaah||1} org</span>
           <span class="chip ${pasporColor}">${pasporChip}</span>
-          ${hasPkg ? '<span class="chip chip-blue">📦 Paket Dipilih</span>' : ''}
+          ${hasPkg ? '<span class="chip chip-blue">📦 Paket</span>' : ''}
         </div>
       </td>
-      <td><span style="background:#e6f4ee;color:#0A7C4F;padding:2px 9px;border-radius:50px;font-size:11px;font-weight:600">${budgetLabel(l.budget)}</span></td>
-      <td>
-        <select class="status-select status-${l.status || 'baru'}" onchange="updateStatus('${l.id}', this.value, this)" style="margin-bottom:4px;font-size:11px;padding:4px 6px">
+      <td><span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:700">${budgetLabel(l.budget)}</span></td>
+      <td style="white-space:nowrap">
+        <select class="status-select" onchange="updateStatus('${l.id}', this.value, this)">
           <option value="baru" ${l.status==='baru'?'selected':''}>🔵 Baru</option>
           <option value="proses" ${l.status==='proses'?'selected':''}>🟡 Proses</option>
           <option value="closing" ${l.status==='closing'?'selected':''}>🟢 Closing</option>
           <option value="batal" ${l.status==='batal'?'selected':''}>🔴 Batal</option>
-        </select><br/>
-        <button class="btn-delete" onclick="deleteLead('${l.id}')" style="font-size:11px">🗑️ Hapus</button>
+        </select>
+        <button class="btn-delete" onclick="deleteLead('${l.id}')" title="Hapus">🗑</button>
       </td>
-      <td class="td-date" style="min-width:100px">
+      <td style="min-width:90px">
         ${fmtDate(l.createdAt)}
-        <span style="font-size:10px;color:var(--primary);background:var(--primary-light);padding:1px 5px;border-radius:4px;display:inline-block;margin-top:2px">
-          ${escHtml(l.utm_source || 'organic')}
-        </span>
+        <span style="font-size:9px;color:var(--primary);background:var(--primary-light);padding:1px 5px;border-radius:4px;display:inline-block;margin-top:2px">${escHtml(l.utm_source||'organic')}</span>
       </td>
-      <td style="width:60px">
-        <button class="btn-detail" id="btn-det-${l.id}" onclick="toggleDetail('${l.id}')" title="Lihat detail lengkap">▼ Detail</button>
+      <td style="width:56px">
+        <button class="btn-detail" id="btn-det-${l.id}" onclick="toggleDetail('${l.id}')">▼ Detail</button>
       </td>
     </tr>
     <tr class="detail-row" id="${detailId}">
       <td colspan="7" style="padding:0;border-bottom:2px solid var(--primary)">
-        <div class="detail-inner">
-          ${pkgBlock}
-          <div class="detail-cell">
-            <div class="detail-cell-label">📋 Target</div>
-            <div class="detail-cell-val">${escHtml(l.targetType||'-')} · ${waktuLabel(l.waktu)}</div>
-          </div>
-          <div class="detail-cell">
-            <div class="detail-cell-label">💰 Budget</div>
-            <div class="detail-cell-val">${budgetLabel(l.budget)}</div>
-          </div>
-          <div class="detail-cell">
-            <div class="detail-cell-label">🛂 Paspor</div>
-            <div class="detail-cell-val">${escHtml(l.paspor||'-')}</div>
-          </div>
-          <div class="detail-cell">
-            <div class="detail-cell-label">👥 Profil Jamaah</div>
-            <div class="detail-cell-val">${profileFull}</div>
-          </div>
-          <div class="detail-cell">
-            <div class="detail-cell-label">📡 Sumber / UTM</div>
-            <div class="detail-cell-val">${escHtml(l.source||'-')}<br><span style="color:var(--text-muted);font-size:11px">${escHtml(l.utm_source||'-')} / ${escHtml(l.utm_campaign||'-')}</span></div>
-          </div>
-          <div class="detail-cell">
-            <div class="detail-cell-label">🌐 URL Halaman</div>
-            <div class="detail-cell-val" style="font-size:10px;word-break:break-all">${escHtml(l.pageUrl||'-')}</div>
-          </div>
-          <div class="detail-cell">
-            <div class="detail-cell-label">🕒 Waktu Masuk</div>
-            <div class="detail-cell-val">${(new Date(l.createdAt)).toLocaleString('id-ID')}</div>
-          </div>
+        <div class="detail-wrap">
+          ${pkgSec}
+          ${formSec}
+          ${utmSec}
+          ${techSec}
+          ${notesSec}
         </div>
       </td>
     </tr>
@@ -962,15 +1024,25 @@ function toggleDetail(id) {
 
 // ── Update status ──
 async function updateStatus(id, status, selectEl) {
-  const cls = 'status-' + status;
-  selectEl.className = 'status-select ' + cls;
+  selectEl.className = 'status-select';
   await fetch(`/api/leads/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
     body: JSON.stringify({ status })
   });
-  toast(`✅ Status lead diubah ke "${status}"`);
+  toast(`✅ Status → "${status}"`);
   loadStats();
+}
+
+// ── Save Notes ──
+async function saveNotes(id) {
+  const notes = document.getElementById(`notes-${id}`)?.value || '';
+  await fetch(`/api/leads/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+    body: JSON.stringify({ notes })
+  });
+  toast('📝 Catatan tersimpan!');
 }
 
 // ── Delete lead ──

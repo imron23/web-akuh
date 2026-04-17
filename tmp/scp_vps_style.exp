@@ -1,0 +1,7 @@
+#!/usr/bin/expect -f
+set timeout -1
+set password "gha-sj5-u6e-pdp"
+spawn scp -o StrictHostKeyChecking=no style.css ubuntu@43.157.202.165:~/web-akuh/
+expect "password:"
+send "$password\r"
+expect eof

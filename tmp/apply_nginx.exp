@@ -1,0 +1,23 @@
+#!/usr/bin/expect -f
+set timeout 120
+set password "gha-sj5-u6e-pdp"
+
+spawn ssh -o StrictHostKeyChecking=no ubuntu@43.157.202.165
+expect "password:"
+send "$password\r"
+expect "$ "
+
+send "sudo cp /tmp/akuh_nginx.conf /etc/nginx/sites-available/akuh.web.id\r"
+expect "$ "
+
+send "sudo ln -sf /etc/nginx/sites-available/akuh.web.id /etc/nginx/sites-enabled/akuh.web.id\r"
+expect "$ "
+
+send "sudo nginx -t && sudo systemctl start nginx && sudo systemctl reload nginx\r"
+expect "$ "
+
+send "sudo systemctl status nginx --no-pager\r"
+expect "$ "
+
+send "exit\r"
+expect eof

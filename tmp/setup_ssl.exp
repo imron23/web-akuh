@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+set timeout 180
+set password "gha-sj5-u6e-pdp"
+
+spawn ssh -o StrictHostKeyChecking=no ubuntu@43.157.202.165
+expect "password:"
+send "$password\r"
+expect "$ "
+
+# Run certbot non-interactively
+send "sudo certbot --nginx -d akuh.web.id -d www.akuh.web.id --non-interactive --agree-tos --email imron.bintangsakti@gmail.com --redirect\r"
+expect "$ "
+
+send "sudo systemctl status nginx --no-pager | head -10\r"
+expect "$ "
+
+send "sudo certbot renew --dry-run\r"
+expect "$ "
+
+send "exit\r"
+expect eof

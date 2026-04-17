@@ -1,0 +1,7 @@
+#!/usr/bin/expect -f
+set timeout 30
+set password "gha-sj5-u6e-pdp"
+spawn scp -o StrictHostKeyChecking=no /Users/imron/Documents/Web-akuh/tmp/akuh_nginx.conf ubuntu@43.157.202.165:/tmp/akuh_nginx.conf
+expect "password:"
+send "$password\r"
+expect eof

@@ -1,0 +1,27 @@
+#!/usr/bin/expect -f
+set timeout 60
+set password "gha-sj5-u6e-pdp"
+
+spawn ssh -o StrictHostKeyChecking=no ubuntu@43.157.202.165
+expect "password:"
+send "$password\r"
+expect "$ "
+
+# Find what's using port 80
+send "sudo ss -tlnp | grep ':80'\r"
+expect "$ "
+
+send "sudo fuser -k 80/tcp || true\r"
+expect "$ "
+
+send "sudo systemctl start nginx\r"
+expect "$ "
+
+send "sudo nginx -t\r"
+expect "$ "
+
+send "sudo systemctl status nginx --no-pager | head -20\r"
+expect "$ "
+
+send "exit\r"
+expect eof
