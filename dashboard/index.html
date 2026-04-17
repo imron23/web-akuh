@@ -200,8 +200,8 @@
     .btn-amber:hover{opacity:.9}
 
     /* ── Table – Compact ── */
-    .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-    table{width:100%;border-collapse:collapse}
+    .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto;-webkit-overflow-scrolling:touch}
+    table{width:100%;border-collapse:collapse;min-width:800px}
     thead th{
       background:var(--bg);padding:7px 10px;text-align:left;
       font-size:10px;font-weight:800;color:var(--text-muted);text-transform:uppercase;
@@ -256,6 +256,13 @@
     }
     .btn-detail:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
     .btn-detail.open{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+    .btn-delete{
+      background:none;border:none;color:#F87171;font-size:14px;cursor:pointer;padding:4px;border-radius:4px;
+      transition:background 0.2s;
+    }
+    .btn-delete:hover{background:#FEE2E2}
+    [data-theme="dark"] .btn-delete:hover{background:rgba(248,113,113,0.1)}
 
     .badge-baru{background:#EFF6FF;color:#3B82F6}
     .badge-proses{background:#FFFBEB;color:#D97706}
@@ -369,6 +376,11 @@
       .detail-grid, .detail-grid.wide {grid-template-columns:1fr !important;}
       .topbar-mac{padding:0 14px;}
       .analytics-grid{grid-template-columns:1fr;}
+      .btn-delete{display:none !important;} /* Hide delete on mobile */
+      .detail-wrap { 
+        position: sticky; left: 0; width: calc(100vw - 24px); 
+        box-sizing: border-box; 
+      }
     }
     @media(max-width:640px){
       .login-split-left{display:none}
@@ -1087,13 +1099,18 @@ async function saveNotes(id) {
 
 // ── Delete lead ──
 async function deleteLead(id) {
-  if (!confirm('Yakin hapus lead ini?')) return;
+  const confirmStr = prompt('⚠️ PERHATIAN!\n\nLead yang dihapus TIDAK BISA dikembalikan. \n\nKetik "HAPUS" (huruf besar) untuk melanjutkan:');
+  if (confirmStr !== 'HAPUS') {
+    if (confirmStr !== null) toast('❌ Dibatalkan: Kata kunci salah.');
+    return;
+  }
+  
   const res = await fetch(`/api/leads/${id}`, {
     method: 'DELETE',
     headers: { 'Authorization': `Bearer ${token}` }
   });
   if (res.ok) {
-    toast('🗑️ Lead dihapus');
+    toast('🗑️ Lead berhasil dihapus permanen');
     loadAll();
   }
 }
