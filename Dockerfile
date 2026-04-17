@@ -17,8 +17,8 @@ RUN mkdir -p /app/data && \
     if [ ! -f /app/data/leads.json ]; then echo "[]" > /app/data/leads.json; fi
 
 # Port aplikasi
-ENV PORT=4000
-EXPOSE 4000
+ENV PORT=3000
+EXPOSE 3000
 
 # Volume untuk leads.json (data runtime yang perlu persistent)
 VOLUME ["/app/data"]
