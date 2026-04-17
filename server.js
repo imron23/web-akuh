@@ -21,6 +21,29 @@ const DB_FILE = path.join(__dirname, 'data', 'leads.json');
 
 // ─── Middleware ──────────────────────────────────────────────
 app.use(express.json());
+
+// Dynamic serve for index.html to inject Tracking Config from .env
+app.get('/', (req, res) => {
+  const htmlPath = path.join(__dirname, 'index.html');
+  fs.readFile(htmlPath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error reading index.html');
+    
+    const configStr = JSON.stringify({
+      gtmId: process.env.GTM_ID || '',
+      metaPixel: process.env.META_PIXEL_ID || '',
+      tiktokPixel: process.env.TIKTOK_PIXEL_ID || '',
+      apiBase: ''
+    });
+
+    const replacedText = data.replace(
+      /<script>\s*window\.AKUH_CONFIG\s*=\s*\{[\s\S]*?\};\s*<\/script>/i,
+      `<script>window.AKUH_CONFIG = ${configStr};</script>`
+    );
+
+    res.send(replacedText);
+  });
+});
+
 app.use(express.static(path.join(__dirname)));
 
 // CORS sederhana (sesuaikan domain production)
