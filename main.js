@@ -686,12 +686,8 @@ window.addEventListener('scroll', () => {
   // Phone input: allow angka, spasi, dash, +
   const phoneInput = document.getElementById('form-wa');
   if (phoneInput) {
-    phoneInput.setAttribute('inputmode', 'numeric');
-    phoneInput.setAttribute('maxlength', '16');
-    phoneInput.setAttribute('autocomplete', 'tel');
-    phoneInput.placeholder = '08xxxxxxxxxx';
-
-    // Blokir karakter yang tidak relevan
+    // Atribut sudah di-set di HTML (autocomplete="tel", inputmode, maxlength)
+    // Hanya pasang event listeners di sini
     phoneInput.addEventListener('keydown', (e) => {
       const allowed = ['Backspace','Delete','Tab','ArrowLeft','ArrowRight','Home','End','Enter'];
       if (allowed.includes(e.key) || e.ctrlKey || e.metaKey) return;
