@@ -6,6 +6,126 @@ const utmParams = {
   content: new URLSearchParams(window.location.search).get('utm_content') || ''
 };
 
+// ===== VALIDASI NOMOR HP INDONESIA =====
+/**
+ * Format yang valid:
+ *  - 08xxxxxxx   (min 10 digit total)
+ *  - 628xxxxxxx  (mulai 62, min 10 digit)
+ *  - +628xxxxxxx (mulai +62)
+ *  - Panjang digit bersih: 8–13 angka
+ */
+function validatePhoneID(raw) {
+  // Hapus semua karakter selain angka dan +
+  const cleaned = raw.replace(/[^\d+]/g, '');
+  // Hapus leading + jika ada
+  const digitsOnly = cleaned.replace(/^\+/, '');
+
+  // Harus dimulai dengan 08 atau 628
+  if (!/^(08|628)/.test(digitsOnly)) {
+    return { valid: false, msg: 'Mulai dengan 08 atau 628 (contoh: 08123456789)' };
+  }
+
+  // Hitung digit murni (tanpa strip/spasi)
+  const digitCount = digitsOnly.length;
+  if (digitCount < 9) {
+    return { valid: false, msg: `Nomor terlalu pendek (${digitCount} digit, min 10 untuk 08xx / min 11 untuk 628xx)` };
+  }
+  if (digitCount > 15) {
+    return { valid: false, msg: 'Nomor terlalu panjang (maks 15 digit)' };
+  }
+
+  return { valid: true, normalized: digitsOnly };
+}
+
+// ===== HELPER: Tampilkan error field =====
+function setFieldError(input, msg) {
+  input.style.borderColor = '#ef4444';
+  input.style.boxShadow = '0 0 0 3px rgba(239,68,68,.15)';
+  // Hapus error lama
+  const old = input.parentElement.querySelector('.field-err');
+  if (old) old.remove();
+  if (msg) {
+    const err = document.createElement('div');
+    err.className = 'field-err';
+    err.style.cssText = 'color:#ef4444;font-size:11px;font-weight:600;margin-top:4px;display:flex;align-items:center;gap:4px';
+    err.innerHTML = `<span>⚠️</span> ${msg}`;
+    input.parentElement.appendChild(err);
+  }
+  // Shake animation
+  input.classList.remove('shake');
+  void input.offsetWidth;
+  input.classList.add('shake');
+}
+
+function clearFieldError(input) {
+  input.style.borderColor = '';
+  input.style.boxShadow = '';
+  const old = input.parentElement.querySelector('.field-err');
+  if (old) old.remove();
+  input.classList.remove('shake');
+}
+
+// Inject shake CSS sekali
+(function injectValidationStyles() {
+  if (document.getElementById('validation-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'validation-styles';
+  s.textContent = `
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      20%,60%{transform:translateX(-5px)}
+      40%,80%{transform:translateX(5px)}
+    }
+    .shake { animation: shake .35s ease; }
+    .field-ok {
+      border-color: #10b981 !important;
+      box-shadow: 0 0 0 3px rgba(16,185,129,.12) !important;
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin:0; }
+    input[type=number] { -moz-appearance: textfield; }
+  `;
+  document.head.appendChild(s);
+})();
+
+// ===== ENFORCE NUMBER-ONLY INPUT =====
+function enforceNumberOnly(input, opts = {}) {
+  const { min = null, max = null } = opts;
+
+  // Blokir karakter non-angka saat mengetik
+  input.addEventListener('keydown', (e) => {
+    const allowed = ['Backspace','Delete','Tab','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End','Enter'];
+    if (allowed.includes(e.key)) return;
+    if (e.ctrlKey || e.metaKey) return; // Allow ctrl+a, ctrl+c, etc.
+    if (!/^\d$/.test(e.key)) {
+      e.preventDefault();
+    }
+  });
+
+  // Hapus karakter non-angka saat paste
+  input.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+    const digits = pasted.replace(/\D/g, '');
+    const start = input.selectionStart;
+    const end = input.selectionEnd;
+    const current = input.value;
+    input.value = current.slice(0, start) + digits + current.slice(end);
+    input.dispatchEvent(new Event('input'));
+  });
+
+  // Validasi range saat blur
+  if (min !== null || max !== null) {
+    input.addEventListener('blur', () => {
+      const val = parseInt(input.value);
+      if (isNaN(val)) { setFieldError(input, `Harap isi angka`); return; }
+      if (min !== null && val < min) { setFieldError(input, `Minimum ${min}`); return; }
+      if (max !== null && val > max) { setFieldError(input, `Maksimum ${max}`); return; }
+      clearFieldError(input);
+    });
+  }
+}
+
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -218,18 +338,36 @@ function showStep(step) {
 }
 
 function nextStep(step) {
-  // Validate current step inputs
   const currentStepEl = document.getElementById(`step-${currentStep}`);
   const inputs = currentStepEl.querySelectorAll('input[required], select[required]');
   let isValid = true;
+
   inputs.forEach(input => {
-    if (!input.value) {
-      input.style.borderColor = 'red';
+    if (!input.value.trim()) {
+      setFieldError(input, 'Field ini wajib diisi');
       isValid = false;
     } else {
-      input.style.borderColor = '';
+      clearFieldError(input);
     }
   });
+
+  // Validasi khusus nomor WhatsApp di Step 1
+  if (currentStep === 1) {
+    const phoneInput = document.getElementById('form-wa');
+    if (phoneInput && phoneInput.value) {
+      const result = validatePhoneID(phoneInput.value);
+      if (!result.valid) {
+        setFieldError(phoneInput, result.msg);
+        isValid = false;
+      } else {
+        clearFieldError(phoneInput);
+        phoneInput.classList.add('field-ok');
+        // Normalisasi: simpan format bersih tanpa + tapi dengan 08 atau 628
+        // (biarkan user input apa adanya, normalisasi hanya di submit)
+      }
+    }
+  }
+
   if (!isValid) return;
   showStep(step);
 }
@@ -240,7 +378,14 @@ function prevStep(step) {
 
 // ===== DYNAMIC JAMAAH FORM =====
 function renderJamaahList() {
-  const count = parseInt(document.getElementById('form-jamaah').value) || 0;
+  const jamaahInput = document.getElementById('form-jamaah');
+  let count = parseInt(jamaahInput.value) || 0;
+
+  // Validasi range
+  if (count < 0) { jamaahInput.value = ''; count = 0; }
+  if (count > 10) { jamaahInput.value = '10'; count = 10; setFieldError(jamaahInput, 'Maks 10 jamaah'); }
+  else if (count >= 1) clearFieldError(jamaahInput);
+
   const container = document.getElementById('jamaah-container');
   container.innerHTML = '';
   if (count <= 0) return;
@@ -262,7 +407,14 @@ function renderJamaahList() {
           </select>
         </div>
         <div class="form-group">
-          <input type="number" class="jamaah-age" placeholder="Usia (Tahun)" required min="1" max="110"/>
+          <input type="text" inputmode="numeric" class="jamaah-age"
+            placeholder="Usia (Tahun)" required
+            pattern="[0-9]*" maxlength="3"
+            onkeydown="if(!/[0-9]/.test(event.key) && !['Backspace','Delete','Tab','ArrowLeft','ArrowRight'].includes(event.key)) event.preventDefault()"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3);
+              const v=parseInt(this.value);
+              if(this.value && (v<1||v>110)){this.style.borderColor='#ef4444';const e=this.parentElement.querySelector('.field-err');if(!e){const d=document.createElement('div');d.className='field-err';d.style.cssText='color:#ef4444;font-size:11px;font-weight:600;margin-top:4px';d.textContent='\u26A0\uFE0F Usia 1\u2013110 tahun';this.parentElement.appendChild(d);}}else{this.style.borderColor='';const e=this.parentElement.querySelector('.field-err');if(e)e.remove();}"
+          />
         </div>
       </div>
     `;
@@ -311,6 +463,38 @@ async function submitWizard(e) {
 
   const isLansia = profiles.some(p => parseInt(p.age) >= 60);
 
+  // ── Validasi phone sebelum kirim ──
+  const phoneResult = validatePhoneID(phone);
+  if (!phoneResult.valid) {
+    const phoneInput = document.getElementById('form-wa');
+    setFieldError(phoneInput, phoneResult.msg);
+    btn.disabled = false;
+    btn.textContent = 'Kirim & Konsultasi';
+    return;
+  }
+
+  // ── Validasi profiles: semua harus terisi ──
+  let profilesValid = true;
+  document.querySelectorAll('.jamaah-rel').forEach((rel, i) => {
+    const ageEl = document.querySelectorAll('.jamaah-age')[i];
+    if (!rel.value) { setFieldError(rel, 'Pilih hubungan jamaah'); profilesValid = false; }
+    else clearFieldError(rel);
+    const age = parseInt(ageEl?.value);
+    if (!ageEl?.value || isNaN(age) || age < 1 || age > 110) {
+      setFieldError(ageEl, 'Usia 1–110 tahun'); profilesValid = false;
+    } else clearFieldError(ageEl);
+  });
+  if (!profilesValid) {
+    btn.disabled = false;
+    btn.textContent = 'Kirim & Konsultasi';
+    return;
+  }
+
+  // Normalisasi nomor ke format 62xxx
+  const normalizedPhone = phoneResult.normalized.startsWith('0')
+    ? '62' + phoneResult.normalized.slice(1)
+    : phoneResult.normalized;
+
   btn.disabled = true;
   btn.textContent = '⏳ Mengirim...';
 
@@ -320,7 +504,7 @@ async function submitWizard(e) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name, phone, targetType, budget, waktu, paspor,
+        name, phone: normalizedPhone, targetType, budget, waktu, paspor,
         wilayah,
         utm_source: utmParams.source,
         utm_medium: utmParams.medium,
@@ -348,7 +532,7 @@ async function submitWizard(e) {
 
   if (window.AKUHTrack) {
     window.AKUHTrack.lead(
-      { phone: phone.replace(/\D/g,''), firstName: name.split(' ')[0] },
+      { phone: normalizedPhone, firstName: name.split(' ')[0] },
       { currency: 'IDR', content_name: targetType + '-' + budget, value: 1 }
     );
   }
@@ -490,3 +674,58 @@ window.addEventListener('scroll', () => {
     }
   });
 }, { passive: true });
+
+// ===== INIT VALIDASI INPUT =====
+(function initValidation() {
+  // Enforce number-only pada input jumlah jamaah
+  const jamaahInput = document.getElementById('form-jamaah');
+  if (jamaahInput) {
+    enforceNumberOnly(jamaahInput, { min: 1, max: 10 });
+  }
+
+  // Phone input: allow angka, spasi, dash, +
+  const phoneInput = document.getElementById('form-wa');
+  if (phoneInput) {
+    phoneInput.setAttribute('inputmode', 'numeric');
+    phoneInput.setAttribute('maxlength', '16');
+    phoneInput.setAttribute('autocomplete', 'tel');
+    phoneInput.placeholder = '08xxxxxxxxxx';
+
+    // Blokir karakter yang tidak relevan
+    phoneInput.addEventListener('keydown', (e) => {
+      const allowed = ['Backspace','Delete','Tab','ArrowLeft','ArrowRight','Home','End','Enter'];
+      if (allowed.includes(e.key) || e.ctrlKey || e.metaKey) return;
+      if (!/[0-9+\-\s]/.test(e.key)) e.preventDefault();
+    });
+
+    // Strip paste ke angka+tanda saja
+    phoneInput.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData('text');
+      const cleaned = pasted.replace(/[^\d+\-\s]/g, '').trim();
+      phoneInput.value = cleaned;
+      phoneInput.dispatchEvent(new Event('input'));
+    });
+
+    // Real-time feedback saat blur
+    phoneInput.addEventListener('blur', () => {
+      if (!phoneInput.value) return;
+      const result = validatePhoneID(phoneInput.value);
+      if (!result.valid) {
+        setFieldError(phoneInput, result.msg);
+      } else {
+        clearFieldError(phoneInput);
+        phoneInput.classList.add('field-ok');
+      }
+    });
+
+    // Clear error saat mulai ketik ulang
+    phoneInput.addEventListener('input', () => {
+      phoneInput.classList.remove('field-ok');
+      const errEl = phoneInput.parentElement.querySelector('.field-err');
+      if (errEl) errEl.remove();
+      phoneInput.style.borderColor = '';
+      phoneInput.style.boxShadow = '';
+    });
+  }
+})();
