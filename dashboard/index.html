@@ -264,6 +264,12 @@
     .btn-delete:hover{background:#FEE2E2}
     [data-theme="dark"] .btn-delete:hover{background:rgba(248,113,113,0.1)}
 
+    /* Pinned Action Column */
+    @media(max-width:768px){
+      table th:last-child { position:sticky; right:0; background:var(--bg); z-index:2; box-shadow:-2px 0 5px rgba(0,0,0,0.05); }
+      table td:last-child { position:sticky; right:0; background:var(--card); z-index:2; box-shadow:-2px 0 5px rgba(0,0,0,0.05); border-left:1px solid var(--border); }
+    }
+
     .badge-baru{background:#EFF6FF;color:#3B82F6}
     .badge-proses{background:#FFFBEB;color:#D97706}
     .badge-closing{background:#F0FDF4;color:#16A34A}
@@ -525,17 +531,16 @@
           <table>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Target</th>
-                <th>Identitas &amp; Kontak</th>
-                <th>Budget</th>
-                <th>Status</th>
-                <th>Tgl. Masuk</th>
-                <th></th>
+                <th style="width:26px;padding-left:8px">#</th>
+                <th style="min-width:110px">Target &amp; Budget</th>
+                <th style="min-width:150px">Identitas &amp; Kontak</th>
+                <th style="min-width:100px">Status</th>
+                <th style="min-width:90px">Tgl. Masuk</th>
+                <th style="width:60px">Aksi</th>
               </tr>
             </thead>
             <tbody id="leads-tbody">
-              <tr><td colspan="8" style="text-align:center;padding:48px"><div class="spinner"></div></td></tr>
+              <tr><td colspan="6" style="text-align:center;padding:48px"><div class="spinner"></div></td></tr>
             </tbody>
           </table>
           <div class="pagination">
@@ -993,9 +998,10 @@ function renderTable(leads, total) {
     return `
     <tr id="${rowId}">
       <td style="color:#aaa;font-size:10px;width:26px;padding-left:8px">${offset+i+1}</td>
-      <td style="min-width:90px">
+      <td style="min-width:110px">
         <strong style="color:var(--primary);text-transform:uppercase;font-size:11px;letter-spacing:.3px">${escHtml(l.targetType||'Umrah')}</strong>
-        <div style="font-size:10px;color:var(--text-muted);margin-top:1px">${waktuLabel(l.waktu)}</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:1px;margin-bottom:4px">${waktuLabel(l.waktu)}</div>
+        <span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:700">${budgetLabel(l.budget)}</span>
       </td>
       <td style="min-width:150px">
         <div class="td-name">${escHtml(l.name)}</div>
@@ -1007,8 +1013,7 @@ function renderTable(leads, total) {
           ${hasPkg ? '<span class="chip chip-blue">📦 Paket</span>' : ''}
         </div>
       </td>
-      <td><span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:700">${budgetLabel(l.budget)}</span></td>
-      <td style="white-space:nowrap">
+      <td style="white-space:nowrap; min-width:100px">
         <select class="status-select" onchange="updateStatus('${l.id}', this.value, this)">
           <option value="baru" ${l.status==='baru'?'selected':''}>🔵 Baru</option>
           <option value="proses" ${l.status==='proses'?'selected':''}>🟡 Proses</option>
@@ -1021,12 +1026,12 @@ function renderTable(leads, total) {
         ${fmtDate(l.createdAt)}
         <span style="font-size:9px;color:var(--primary);background:var(--primary-light);padding:1px 5px;border-radius:4px;display:inline-block;margin-top:2px">${escHtml(l.utm_source||'organic')}</span>
       </td>
-      <td style="width:56px">
+      <td style="width:60px; text-align:center">
         <button class="btn-detail" id="btn-det-${l.id}" onclick="toggleDetail('${l.id}')">▼ Detail</button>
       </td>
     </tr>
     <tr class="detail-row" id="${detailId}">
-      <td colspan="7" style="padding:0;border-bottom:2px solid var(--primary)">
+      <td colspan="6" style="padding:0;border-bottom:2px solid var(--primary)">
         <div class="detail-wrap">
           ${pkgSec}
           ${formSec}
@@ -1099,11 +1104,7 @@ async function saveNotes(id) {
 
 // ── Delete lead ──
 async function deleteLead(id) {
-  const confirmStr = prompt('⚠️ PERHATIAN!\n\nLead yang dihapus TIDAK BISA dikembalikan. \n\nKetik "HAPUS" (huruf besar) untuk melanjutkan:');
-  if (confirmStr !== 'HAPUS') {
-    if (confirmStr !== null) toast('❌ Dibatalkan: Kata kunci salah.');
-    return;
-  }
+  if (!confirm('⚠️ PERHATIAN!\n\nLead yang dihapus TIDAK BISA dikembalikan.\n\nYakin hapus permanen data ini?')) return;
   
   const res = await fetch(`/api/leads/${id}`, {
     method: 'DELETE',
