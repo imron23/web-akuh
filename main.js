@@ -586,8 +586,14 @@ function showToast() {
 
 // ===== EXIT INTENT POPUP =====
 let exitShown = false;
+
+function isUserFillingForm() {
+  const form = document.getElementById('consultation-form');
+  return form && form.contains(document.activeElement);
+}
+
 document.addEventListener('mouseleave', (e) => {
-  if (e.clientY <= 0 && !exitShown) {
+  if (e.clientY <= 0 && !exitShown && !isUserFillingForm()) {
     exitShown = true;
     document.getElementById('exit-popup').classList.add('show');
   }
@@ -606,7 +612,7 @@ document.addEventListener('keydown', (e) => {
 let mobileExitTimer = null;
 if (window.innerWidth < 768) {
   mobileExitTimer = setTimeout(() => {
-    if (!exitShown) {
+    if (!exitShown && !isUserFillingForm()) {
       exitShown = true;
       document.getElementById('exit-popup').classList.add('show');
     }
