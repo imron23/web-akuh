@@ -346,13 +346,31 @@
     [data-theme="dark"] #dash-toast{background:#1F2937}
     #dash-toast.show{transform:translateY(0);opacity:1}
 
+    /* ── Mobile Layout Adjustments ── */
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:998;backdrop-filter:blur(2px);transition:opacity 0.2s;opacity:0}
+    .sidebar-overlay.show{display:block;opacity:1}
+    .btn-menu{display:none;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text);margin-right:12px;padding:4px}
+    
     @media(max-width:900px){
       .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .sidebar{width:200px}
+    }
+    @media(max-width:768px){
+      .sidebar{
+        position:fixed;top:0;bottom:0;left:-260px;width:260px;z-index:999;
+        transition:left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 4px 0 16px rgba(0,0,0,0.2);
+      }
+      .sidebar.open{left:0;}
+      .btn-menu{display:block;}
+      .stats-grid{grid-template-columns:1fr;}
+      .main-content{padding:12px;}
+      .toolbar{gap:8px;}
+      .search-input{width:100%;min-width:100%;}
+      .detail-grid, .detail-grid.wide {grid-template-columns:1fr !important;}
+      .topbar-mac{padding:0 14px;}
+      .analytics-grid{grid-template-columns:1fr;}
     }
     @media(max-width:640px){
-      .stats-grid{grid-template-columns:1fr}
-      .main-content{padding:16px}
       .login-split-left{display:none}
       .login-split-right{width:100%;padding:32px 24px}
     }
@@ -398,7 +416,8 @@
 
 <!-- ══ APP ══ -->
 <div id="app">
-  <aside class="sidebar">
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo-box">
         <img src="../assets/akuh-logo.png" alt="Logo" class="sidebar-logo"/>
@@ -431,6 +450,7 @@
   <div class="main-wrapper">
     <header class="topbar-mac">
       <div class="topbar-left">
+        <button class="btn-menu" onclick="toggleSidebar()">☰</button>
         <h1 class="page-title" id="page-title">Daftar Leads</h1>
       </div>
       <div class="topbar-right">
@@ -700,9 +720,29 @@ function switchTab(tab) {
   
   $('page-title').textContent = tab === 'leads' ? 'Daftar Leads' : 'Analitik Produktivitas';
   
+  // Auto-collapse sidebar on mobile
+  if(window.innerWidth <= 768) {
+    const sb = document.getElementById('sidebar');
+    const ov = document.getElementById('sidebar-overlay');
+    if(sb) sb.classList.remove('open');
+    if(ov) ov.classList.remove('show');
+  }
+  
   // Lazy load data for the active tab
   if(tab === 'leads') loadLeads();
   else loadStats();
+}
+
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebar-overlay');
+  if(sb.classList.contains('open')) {
+    sb.classList.remove('open');
+    ov.classList.remove('show');
+  } else {
+    sb.classList.add('open');
+    ov.classList.add('show');
+  }
 }
 
 let activeCharts = {};
@@ -759,7 +799,7 @@ function renderAllCharts(leads) {
     }},
     { id: 'chart-wilayah', type: 'bar', options: { indexAxis: 'y' }, data: () => {
         const counts = {};
-        leads.forEach(l => { if(l.wilayah) counts[l.wilayah] = (counts[l.wilayah] || 0) + 1; });
+        leads.forEach(l => { if(l.wilayah && l.wilayah !== '-') counts[l.wilayah] = (counts[l.wilayah] || 0) + 1; });
         const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]).slice(0, 10);
         return { labels: sorted.map(x => x[0]), datasets: [{ label: 'Total', data: sorted.map(x => x[1]), backgroundColor: VIBE_COLORS[0] }] };
     }},
