@@ -870,7 +870,12 @@ function clearCacheAndReload() {
 
 async function loadLeads() {
   const tbody = $('leads-tbody');
-  tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:40px"><div class="spinner"></div></td></tr>';
+  if (tbody.children.length <= 1) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px"><div class="spinner"></div></td></tr>';
+  } else {
+    tbody.style.opacity = '0.4';
+    tbody.style.pointerEvents = 'none';
+  }
   
   const search = $('search-leads').value;
   const status = $('status-leads').value;
@@ -895,14 +900,19 @@ async function loadLeads() {
     // Total DB count (mini stats)
     $('s-filtered').textContent = total;
   } catch(e) {
-    tbody.innerHTML = '<tr><td colspan="10" class="empty-state"><div class="emoji">⚠️</div><p>Gagal memuat data</p></td></tr>';
+    tbody.style.opacity = '1';
+    tbody.style.pointerEvents = 'auto';
+    tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><div class="emoji">⚠️</div><p>Gagal memuat data</p></td></tr>';
   }
 }
 
 function renderTable(leads, total) {
   const tbody = $('leads-tbody');
+  tbody.style.opacity = '1';
+  tbody.style.pointerEvents = 'auto';
+  
   if (!leads.length) {
-    tbody.innerHTML = '<tr><td colspan="10"><div class="empty-state"><div class="emoji">📭</div><p>Belum ada leads.</p></div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="emoji">📭</div><p>Belum ada leads.</p></div></td></tr>';
     $('pagination-info').textContent = '0 leads ditemukan';
     $('pagination-btns').innerHTML = '';
     return;
