@@ -70,6 +70,17 @@
     }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     window.fbq('init', id);
     window.fbq('track', 'PageView');
+    // ── Hierarki Meta Pixel LP: PageView → ViewContent (segera) ──
+    // ViewContent dipanggil langsung setelah PageView untuk menandai
+    // bahwa user melihat halaman produk/landing page (konten yang relevan).
+    window.fbq('track', 'ViewContent', {
+      content_name: 'Paket Umrah & Haji – AKUH',
+      content_category: 'Umrah Haji',
+      content_ids: ['akuh-lp-2026'],
+      content_type: 'product',
+      currency: 'IDR',
+      value: 0
+    });
     console.log('[AKUH Tracking] Meta Pixel loaded:', id);
   }
 
@@ -182,14 +193,23 @@
       });
     });
 
-    // Scroll 50% → ViewContent
+    // Scroll 50% → ViewContent (deep engagement signal, sudah dikirim saat init)
+    // Hanya kirim sebagai custom event tambahan, bukan duplikasi ViewContent utama
     let scrollFired = false;
     window.addEventListener('scroll', () => {
       if (scrollFired) return;
       const scrollPct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
       if (scrollPct >= 50) {
         scrollFired = true;
-        AKUHTrack.viewContent({ content_name: 'Landing Page AKUH' });
+        // Kirim 'ViewContent' sekali lagi untuk engagement (50% scroll)
+        // Meta deduplication via event_id akan menangani duplikasi sisi server
+        AKUHTrack.viewContent({
+          content_name: 'Landing Page AKUH – 50% Scroll',
+          content_ids: ['akuh-lp-2026'],
+          content_type: 'product',
+          currency: 'IDR',
+          value: 0
+        });
       }
     }, { passive: true });
   }
@@ -200,9 +220,20 @@
   function init() {
     initGTM(GTM_ID);
     initGA4(GA4_ID);
-    initMetaPixel(META_PX);
+    initMetaPixel(META_PX);      // Sudah fire PageView + ViewContent di dalam initMetaPixel
     initTikTokPixel(TIKTOK_PX);
-    AKUHTrack.pageView();
+    // PageView & ViewContent untuk GTM/GA4/TikTok (Meta sudah di-handle di initMetaPixel)
+    if (window.dataLayer) window.dataLayer.push({ event: 'PageView' });
+    if (typeof window.gtag === 'function') window.gtag('event', 'page_view');
+    if (window.ttq) {
+      window.ttq.track('Browse');
+      window.ttq.track('ViewContent', {
+        content_name: 'Paket Umrah & Haji – AKUH',
+        content_type: 'product',
+        currency: 'IDR',
+        value: 0
+      });
+    }
     autoTrackClicks();
   }
 

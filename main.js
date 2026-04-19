@@ -533,7 +533,13 @@ async function submitWizard(e) {
   if (window.AKUHTrack) {
     window.AKUHTrack.lead(
       { phone: normalizedPhone, firstName: name.split(' ')[0] },
-      { currency: 'IDR', content_name: targetType + '-' + budget, value: 1 }
+      {
+        currency: 'IDR',
+        content_name: `${targetType}-${budget}`,
+        content_ids: [selectedPkg.name || 'konsultasi-umrah-haji'],
+        content_type: 'product',
+        value: 1
+      }
     );
   }
 

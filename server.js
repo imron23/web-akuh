@@ -190,7 +190,7 @@ let waIndex = 0;
 
 // POST /api/leads  – simpan lead dari form LP
 app.post('/api/leads', async (req, res) => {
-  const { name, phone } = req.body;
+  const { name, phone, pageUrl, budget } = req.body;
   if (!name || !phone) {
     return res.status(400).json({ error: 'Nama dan nomor WA wajib diisi.' });
   }
